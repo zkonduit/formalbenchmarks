@@ -1,0 +1,40 @@
+# This workflow runs when a new circuit is added to the repository or when a change occurs to an external tool like ECNE
+
+name: Run Benchmarks
+
+# TODO Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# When a circuit is uploaded to a particular folder
+# 1. Generate the different .circom files to take into account different inputs 
+# 2. Install circom
+# 3. Run circom on each of the generated files, on each of the compiler optimization flags
+# 4. Run the formal verification tool against all of the r1cs files, and determine accuracy
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # Let's tackle step (3) first.
+  runCircom:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        name: iden3/circom
+        ref: refs/heads/release
+    - uses: actions-rs/cargo@v1
+      with:
+        command: build
+        args: --release
+    - uses: actions-rs/cargo@v1
+      with:
+        command: install
+        args: --path circom
+    - run: circom 
