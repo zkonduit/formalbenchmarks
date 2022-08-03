@@ -29,12 +29,8 @@ jobs:
       with:
         repository: iden3/circom
         path: circom
-    - uses: actions-rs/cargo@v1
-      with:
-        command: build
-        args: --release
-    - uses: actions-rs/cargo@v1
-      with:
-        command: install
-        args: --path circom
+    - run: cargo build --release
+      working-directory: circom
+    - run: cargo install --path circom
+      working-directory: circom
     - run: circom 
