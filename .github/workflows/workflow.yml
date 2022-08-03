@@ -33,4 +33,4 @@ jobs:
       working-directory: circom
     - run: cargo install --path circom
       working-directory: circom
-    - run: circom 
+    - run: circom hashes/mimc.circom --r1cs
