@@ -34,6 +34,7 @@ jobs:
     - run: cargo install --path circom
       working-directory: circom
   runCircom:
+    needs: installCircom
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
