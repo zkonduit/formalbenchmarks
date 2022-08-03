@@ -21,8 +21,8 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # Let's tackle step (3) first.
-  runCircom:
+  # Let's tackle step (2) first.
+  installCircom:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -33,4 +33,10 @@ jobs:
       working-directory: circom
     - run: cargo install --path circom
       working-directory: circom
+  runCircom:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        path: main
     - run: circom hashes/mimc.circom --r1cs
