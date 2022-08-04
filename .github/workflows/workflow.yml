@@ -38,6 +38,7 @@ jobs:
         path: main
     - run: |
           echo "Root Directory" 
+          cd main
           ls -la .
  #   - run: circom example.circom --r1cs
  #     working-directory: scratch
