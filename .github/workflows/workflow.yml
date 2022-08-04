@@ -25,20 +25,16 @@ jobs:
   installCircom:
     runs-on: ubuntu-latest
     steps:
-  #  - uses: actions/checkout@v3
-  #    with:
-  #      repository: iden3/circom
-  #      path: circom
-  #  - run: cargo build --release
- #     working-directory: circom
- #   - run: cargo install --path circom
- #     working-directory: circom
+    - uses: actions/checkout@v3
+      with:
+        repository: iden3/circom
+        path: circom
+    - run: cargo build --release
+      working-directory: circom
+    - run: cargo install --path circom
+      working-directory: circom
     - uses: actions/checkout@v3
       with:
         path: main
-    - run: |
-          echo "Root Directory" 
-          cd main
-          ls -la .
- #   - run: circom example.circom --r1cs
- #     working-directory: scratch
+    - run: circom example.circom --r1cs
+      working-directory: main/scratch
