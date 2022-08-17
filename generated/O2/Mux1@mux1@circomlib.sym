@@ -1,0 +1,8 @@
+1,1,1,main.out
+2,2,1,main.c[0]
+3,3,1,main.c[1]
+4,4,1,main.s
+5,-1,0,main.mux.out[0]
+6,-1,0,main.mux.c[0][0]
+7,-1,0,main.mux.c[0][1]
+8,-1,0,main.mux.s

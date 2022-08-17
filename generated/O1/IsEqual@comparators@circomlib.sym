@@ -1,0 +1,6 @@
+1,1,1,main.out
+2,2,1,main.in[0]
+3,3,1,main.in[1]
+4,-1,0,main.isz.out
+5,4,0,main.isz.in
+6,5,0,main.isz.inv

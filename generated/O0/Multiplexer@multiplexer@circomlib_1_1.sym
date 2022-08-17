@@ -1,0 +1,10 @@
+1,1,2,main.out[0]
+2,2,2,main.inp[0][0]
+3,3,2,main.sel
+4,4,0,main.dec.out[0]
+5,5,0,main.dec.success
+6,6,0,main.dec.inp
+7,7,1,main.ep[0].out
+8,8,1,main.ep[0].in1[0]
+9,9,1,main.ep[0].in2[0]
+10,10,1,main.ep[0].aux[0]

@@ -1,0 +1,14 @@
+1,1,1,main.xout
+2,2,1,main.yout
+3,3,1,main.x
+4,4,1,main.y
+5,-1,0,main.adder.xout
+6,-1,0,main.adder.yout
+7,-1,0,main.adder.x1
+8,-1,0,main.adder.y1
+9,-1,0,main.adder.x2
+10,-1,0,main.adder.y2
+11,5,0,main.adder.beta
+12,6,0,main.adder.gamma
+13,7,0,main.adder.delta
+14,8,0,main.adder.tau

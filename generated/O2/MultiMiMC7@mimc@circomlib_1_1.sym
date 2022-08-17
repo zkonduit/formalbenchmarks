@@ -1,0 +1,11 @@
+1,1,1,main.out
+2,2,1,main.in[0]
+3,3,1,main.k
+4,-1,1,main.r[0]
+5,-1,1,main.r[1]
+6,-1,0,main.mims[0].out
+7,-1,0,main.mims[0].x_in
+8,-1,0,main.mims[0].k
+9,4,0,main.mims[0].t2[0]
+10,5,0,main.mims[0].t4[0]
+11,6,0,main.mims[0].t6[0]

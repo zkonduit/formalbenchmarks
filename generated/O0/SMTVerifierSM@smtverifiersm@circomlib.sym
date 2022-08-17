@@ -1,0 +1,15 @@
+1,1,0,main.st_top
+2,2,0,main.st_i0
+3,3,0,main.st_iold
+4,4,0,main.st_inew
+5,5,0,main.st_na
+6,6,0,main.is0
+7,7,0,main.levIns
+8,8,0,main.fnc
+9,9,0,main.prev_top
+10,10,0,main.prev_i0
+11,11,0,main.prev_iold
+12,12,0,main.prev_inew
+13,13,0,main.prev_na
+14,14,0,main.prev_top_lev_ins
+15,15,0,main.prev_top_lev_ins_fnc

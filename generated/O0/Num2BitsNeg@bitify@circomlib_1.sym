@@ -1,0 +1,5 @@
+1,1,1,main.out[0]
+2,2,1,main.in
+3,3,0,main.isZero.out
+4,4,0,main.isZero.in
+5,5,0,main.isZero.inv
