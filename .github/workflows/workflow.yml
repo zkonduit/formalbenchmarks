@@ -36,8 +36,8 @@ jobs:
         path: EcneProject
     - run: just install
       working-directory: EcneProject
-    - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym
-      working-directory: EcneProject
+ #   - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym
+ #     working-directory: EcneProject
     
   installCircom:
     runs-on: ubuntu-latest
@@ -67,3 +67,16 @@ jobs:
         path: main
     - run: circom example.circom --r1cs
       working-directory: main/scratch
+    
+  runBenchmarks:
+    needs: [installJulia]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        path: main
+    - run: julia --project=. src/Ecne.jl --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --name xor --sym ../generated/O0/XOR@gates@circomlib.sym
+      working-directory: EcneProject
+    
+      
+      
