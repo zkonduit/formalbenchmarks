@@ -30,12 +30,12 @@ jobs:
       with:
        version: 1.7
     - uses: extractions/setup-just@v1
-    - run: just install
     - uses: actions/checkout@v3
       with: 
         repository: franklynwang/EcneProject
         path: EcneProject
-    - run: $ julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym
+    - run: just install
+    - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym
 
     
   installCircom:
