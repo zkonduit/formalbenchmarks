@@ -35,6 +35,7 @@ jobs:
         repository: franklynwang/EcneProject
         path: EcneProject
     - run: just install
+      working-directory: EcneProject
     - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym
 
     
