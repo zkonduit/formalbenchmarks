@@ -37,7 +37,7 @@ jobs:
     - run: just install
       working-directory: EcneProject
     - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym
-
+      working-directory: EcneProject
     
   installCircom:
     runs-on: ubuntu-latest
