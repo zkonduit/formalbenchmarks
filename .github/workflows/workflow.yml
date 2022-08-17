@@ -29,7 +29,8 @@ jobs:
     - uses: julia-actions/setup-julia@v1
       with:
        version: 1.7
-    - run: julia -e 'println("Hello, World!")'
+    - run: just install
+    
   installCircom:
     runs-on: ubuntu-latest
     steps:
