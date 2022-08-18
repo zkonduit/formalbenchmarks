@@ -76,7 +76,7 @@ jobs:
       with:
         repository: Veridise/Picus
         path: Picus
-    - run: sudo apt-get install racket -f
+    - run: brew install minimal-racket
     - run: raco pkg install --auto rosette
     - run: raco pkg install --auto csv-reading
     - run: brew install z3
