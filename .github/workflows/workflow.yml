@@ -77,8 +77,8 @@ jobs:
         repository: Veridise/Picus
         path: Picus
     - run: sudo apt-get install racket -f
-    - run: raco pkg install rosette
-    - run: raco pkg install csv-reading
+    - run: raco pkg install --auto rosette
+    - run: raco pkg install --auto csv-reading
     - run: brew install z3
     - run: racket ./test-z3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs
       working-directory: Picus
