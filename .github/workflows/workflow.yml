@@ -57,12 +57,14 @@ jobs:
     - uses: julia-actions/setup-julia@v1
       with:
        version: 1.7
+    - uses: julia-actions/cache@v1
     - uses: extractions/setup-just@v1
     - uses: actions/checkout@v3
       with: 
         repository: franklynwang/EcneProject
         path: EcneProject
-    - run: just install
+    - if: steps.cache.outputs.cache-hit != 'true'
+      run: just install
       working-directory: EcneProject
     - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym
       working-directory: EcneProject
