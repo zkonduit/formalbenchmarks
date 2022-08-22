@@ -75,13 +75,28 @@ jobs:
 #    - run: julia --project=. src/Ecne.jl --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --name xor --sym ../generated/O0/XOR@gates@circomlib.sym
 #      working-directory: EcneProject
   ## Install Picus
+    - name: Install Racket
+      uses: Bogdanp/setup-racket@v1.8.1
+      with:
+        architecture: 'x64'
+        distribution: 'full'
+        variant: 'CS'
+        version: 'current'
+    - name: Save Racket version
+      run: racket --version > .racket-version
+    - name: Cache Racket dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/racket
+          ~/.local/share/racket
+          key: ${{ runner.os }}-racket-current-${{ hashFiles('.racket-version') }}   
+      
     - uses: actions/checkout@v3
       with:
         repository: Veridise/Picus
         path: Picus
-    - run: brew install minimal-racket
-    - run: raco pkg install --auto rosette
-    - run: raco pkg install --auto csv-reading
+    - run: raco pkg install --auto --skip-installed rosette csv-reading
     - run: brew install z3
     - run: racket ./test-z3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs
       working-directory: Picus
