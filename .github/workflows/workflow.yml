@@ -72,16 +72,16 @@ jobs:
     - run: julia --project=. src/Ecne.jl --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --name xor --sym ../generated/O0/XOR@gates@circomlib.sym
       working-directory: EcneProject
   ## Install Picus
-    - uses: actions/checkout@v3
-      with:
-        repository: Veridise/Picus
-        path: Picus
-    - run: brew install minimal-racket
-    - run: raco pkg install --auto rosette
-    - run: raco pkg install --auto csv-reading
-    - run: brew install z3
-    - run: racket ./test-z3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs
-      working-directory: Picus
+#    - uses: actions/checkout@v3
+#      with:
+#        repository: Veridise/Picus
+#        path: Picus
+#    - run: brew install minimal-racket
+#    - run: raco pkg install --auto rosette
+#    - run: raco pkg install --auto csv-reading
+#    - run: brew install z3
+#    - run: racket ./test-z3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs
+#      working-directory: Picus
   
     
       
