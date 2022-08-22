@@ -90,7 +90,7 @@ jobs:
         path: |
           ~/.cache/racket
           ~/.local/share/racket
-          key: ${{ runner.os }}-racket-current-${{ hashFiles('.racket-version') }}   
+        key: ${{ runner.os }}-racket-current-${{ hashFiles('.racket-version') }}   
       
     - uses: actions/checkout@v3
       with:
