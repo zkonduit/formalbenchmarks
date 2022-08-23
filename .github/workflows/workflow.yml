@@ -72,15 +72,6 @@ jobs:
 #    - run: julia --project=. src/Ecne.jl --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --name xor --sym ../generated/O0/XOR@gates@circomlib.sym
 #      working-directory: EcneProject
   ## Install Picus
-    - name: Install Racket
-      uses: Bogdanp/setup-racket@v1.8.1
-      with:
-        architecture: 'x64'
-        distribution: 'full'
-        variant: 'CS'
-        version: 'current'
-    - name: Save Racket version
-      run: racket --version > .racket-version
     - name: Cache Racket dependencies
       uses: actions/cache@v3
       id: racketCache
@@ -88,8 +79,14 @@ jobs:
         path: |
           ~/.cache/racket
           ~/.local/share/racket
-        key: ${{ runner.os }}-racket-current-${{ hashFiles('.racket-version') }}   
-      
+        key: ${{ runner.os }}-racket-current-8.6  
+    - name: Install Racket
+      uses: Bogdanp/setup-racket@v1.8.1
+      with:
+        architecture: 'x64'
+        distribution: 'full'
+        variant: 'CS'
+        version: '8.6' # Note: We could use current version here like in here: https://github.com/Bogdanp/setup-racket-cache-example/blob/master/.github/workflows/push.yml but then we need to tweak the caching
     - uses: actions/checkout@v3
       with:
         repository: Veridise/Picus
