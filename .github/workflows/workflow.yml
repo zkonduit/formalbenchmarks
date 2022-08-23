@@ -80,8 +80,7 @@ jobs:
           ~/.cache/racket
           ~/.local/share/racket
         key: ${{ runner.os }}-racket-current-8.6  
-    - if: steps.racketCache.outputs.cache-hit != 'true'   
-      name: Install Racket
+    - name: Install Racket
       uses: Bogdanp/setup-racket@v1.8.1
       with:
         architecture: 'x64'
