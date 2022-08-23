@@ -96,7 +96,7 @@ jobs:
     - run: brew install z3
     - run:  ls -al
       working-directory: Picus
-    - run: racket ./test-z3-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
+    - run: racket ./test-inc-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
       working-directory: Picus
   
     
