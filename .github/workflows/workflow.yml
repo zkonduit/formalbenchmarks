@@ -95,9 +95,7 @@ jobs:
         path: Picus
     - run: raco pkg install --auto --skip-installed rosette csv-reading
     - run: brew install z3
-    - run: |
-        ls -la
-    - run: racket ./test-z3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs
+    - run: racket ./test-z3-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
       working-directory: Picus
   
     
