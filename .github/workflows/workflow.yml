@@ -83,6 +83,7 @@ jobs:
       run: racket --version > .racket-version
     - name: Cache Racket dependencies
       uses: actions/cache@v3
+      id: racketCache
       with:
         path: |
           ~/.cache/racket
@@ -93,7 +94,8 @@ jobs:
       with:
         repository: Veridise/Picus
         path: Picus
-    - run: raco pkg install --auto --skip-installed rosette csv-reading
+    - if: steps.racketCache.outputs.cache-hit != 'true'    
+      run: raco pkg install --auto --skip-installed rosette csv-reading
     - run: brew install z3
     - run: racket ./test-z3-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
       working-directory: Picus
