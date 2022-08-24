@@ -99,6 +99,11 @@ jobs:
       working-directory: Picus
     - run: racket ./test-inc-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
       working-directory: Picus
+      
+      
+  ## Process Output
+    - name: Adding markdown
+      run: echo '### Hello world! :rocket:' >> $GITHUB_STEP_SUMMARY
   
     
       
