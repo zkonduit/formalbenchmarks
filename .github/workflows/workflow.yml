@@ -53,24 +53,24 @@ jobs:
     - run: circom example.circom --r1cs
       working-directory: main/scratch
 # Install Julia
-#    - uses: actions/checkout@v1.0.0
-#    - uses: julia-actions/setup-julia@v1
-#      with:
-#       version: 1.7
-#    - uses: julia-actions/cache@v1
-#      id: juliaCache
-#    - uses: extractions/setup-just@v1
-#    - uses: actions/checkout@v3
-#      with: 
-#        repository: franklynwang/EcneProject
-#        path: EcneProject
-#    - if: steps.juliaCache.outputs.cache-hit != 'true'
-#      run: just install
-#      working-directory: EcneProject
-#    - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym
-#      working-directory: EcneProject
-#    - run: julia --project=. src/Ecne.jl --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --name xor --sym ../generated/O0/XOR@gates@circomlib.sym
-#      working-directory: EcneProject
+    - uses: actions/checkout@v1.0.0
+    - uses: julia-actions/setup-julia@v1
+      with:
+       version: 1.7
+    - uses: julia-actions/cache@v1
+      id: juliaCache
+    - uses: extractions/setup-just@v1
+    - uses: actions/checkout@v3
+      with: 
+        repository: franklynwang/EcneProject
+        path: EcneProject
+    - if: steps.juliaCache.outputs.cache-hit != 'true'
+      run: just install
+      working-directory: EcneProject 
+    - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym >> $GITHUB_STEP_SUMMARY
+      working-directory: EcneProject
+    - run: julia --project=. src/Ecne.jl --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --name xor --sym ../generated/O0/XOR@gates@circomlib.sym >> $GITHUB_STEP_SUMMARY
+      working-directory: EcneProject
   ## Install Picus
     - name: Cache Racket dependencies
       uses: actions/cache@v3
@@ -97,7 +97,7 @@ jobs:
       run: brew install z3
     - run:  ls -al
       working-directory: Picus
-    - run: racket ./test-inc-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
+    - run: racket ./test-inc-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs >> $GITHUB_STEP_SUMMARY
       working-directory: Picus
       
       
