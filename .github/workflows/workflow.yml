@@ -69,7 +69,7 @@ jobs:
       working-directory: EcneProject 
     - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
       working-directory: EcneProject
-    - run: julia --project=. src/Ecne.jl --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --name xor --sym ../generated/O0/XOR@gates@circomlib.sym >> $GITHUB_STEP_SUMMARY
+    - run: julia --project=. src/Ecne.jl --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --name xor --sym ../generated/O0/XOR@gates@circomlib.sym | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
       working-directory: EcneProject
   ## Install Picus
 #    - name: Cache Racket dependencies
