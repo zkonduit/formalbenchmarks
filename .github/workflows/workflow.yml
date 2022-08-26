@@ -67,10 +67,11 @@ jobs:
     - if: steps.juliaCache.outputs.cache-hit != 'true'
       run: just install
       working-directory: EcneProject 
-    - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
-      working-directory: EcneProject
-    - run: julia --project=. src/Ecne.jl --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --name xor --sym ../generated/O0/XOR@gates@circomlib.sym | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
-      working-directory: EcneProject
+    - run: pwd
+#    - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
+#      working-directory: EcneProject
+#    - run: julia --project=. src/Ecne.jl --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --name xor --sym ../generated/O0/XOR@gates@circomlib.sym | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
+#      working-directory: EcneProject
   ## Install Picus
 #    - name: Cache Racket dependencies
 #      uses: actions/cache@v3
@@ -101,7 +102,9 @@ jobs:
 #      working-directory: Picus
       
     - name: Running Batch Commands
-      run: ls -al
+      run: ls -al EcneProject
+    - run: pwd
+    - run: ls -al
     - run: python batchRunECNE.py | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
       
       
