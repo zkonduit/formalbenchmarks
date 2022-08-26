@@ -101,7 +101,7 @@ jobs:
 #      working-directory: Picus
       
     - name: Running Batch Commands
-      run: ls -al
+      run: ls -al EcneProject
     - run: python batchRunECNE.py | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
       
       
