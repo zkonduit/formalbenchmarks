@@ -104,6 +104,7 @@ jobs:
     - name: Running Batch Commands
       run: ls -al EcneProject
     - run: pwd
+    - run: ls -al
     - run: python batchRunECNE.py | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
       
       
