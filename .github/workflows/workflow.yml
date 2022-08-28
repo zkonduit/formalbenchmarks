@@ -101,11 +101,10 @@ jobs:
   #    working-directory: Picus
       
     - name: Running Batch Commands
-    #   run: ls -al EcneProject
-    # - run: pwd
-    # - run: ls -al
+      run: ls -al
+    - run: pwd
     # - run: python batchRunECNE.py | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
-      run: python batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
+    - run: python batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
       
   ## Process Output
     - name: Adding markdown
