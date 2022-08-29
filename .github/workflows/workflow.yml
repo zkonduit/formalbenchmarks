@@ -24,10 +24,8 @@ jobs:
   # Let's tackle step (2) first.
 
     
-  installCircom:
+  runBenchmarks:
     runs-on: ubuntu-latest
-    container:
-      options: --user root
     steps:
     - uses: actions/cache@v3
       id: cache
@@ -107,7 +105,7 @@ jobs:
     - run: pwd
     # - run: python batchRunECNE.py | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
     #- run: python batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
-    - run: python batchRunPicus.py
+    - run: sudo python batchRunPicus.py
       working-directory: main
       
   ## Process Output
