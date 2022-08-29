@@ -24,7 +24,7 @@ jobs:
   # Let's tackle step (2) first.
 
     
-  runBenchmarks:
+  installCircom:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/cache@v3
