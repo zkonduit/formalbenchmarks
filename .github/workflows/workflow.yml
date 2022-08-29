@@ -26,6 +26,8 @@ jobs:
     
   installCircom:
     runs-on: ubuntu-latest
+    container:
+      options: --user root
     steps:
     - uses: actions/cache@v3
       id: cache
