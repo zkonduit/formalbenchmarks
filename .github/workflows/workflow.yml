@@ -95,17 +95,19 @@ jobs:
       run: raco pkg install --auto --skip-installed rosette csv-reading
     - if: steps.racketCache.outputs.cache-hit != 'true'    
       run: brew install z3
-  #  - run:  ls -al
-  #    working-directory: Picus
-  #  - run: racket ./test-inc-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs >> $GITHUB_STEP_SUMMARY
-  #    working-directory: Picus
+    - run:  ls -al
+      working-directory: Picus
+    - run: racket ./test-inc-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
+      working-directory: Picus
+    - run: racket ./test-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
+      working-directory: Picus
       
     - name: Running Batch Commands
       run: ls -al
     - run: pwd
     # - run: python batchRunECNE.py | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
     #- run: python batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
-    - run: python batchRunPicus.py
+    - run: python ../main/batchRunPicus.py
       working-directory: Picus
       
   ## Process Output
