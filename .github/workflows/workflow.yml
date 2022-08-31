@@ -53,62 +53,64 @@ jobs:
     - run: circom example.circom --r1cs
       working-directory: main/scratch
 # Install Julia
-    # - uses: actions/checkout@v1.0.0
-    # - uses: julia-actions/setup-julia@v1
-    #   with:
-    #    version: 1.7
-    # - uses: julia-actions/cache@v1
-    #   id: juliaCache
-    # - uses: extractions/setup-just@v1
-    # - uses: actions/checkout@v3
-    #   with: 
-    #     repository: franklynwang/EcneProject
-    #     path: EcneProject
-    # - if: steps.juliaCache.outputs.cache-hit != 'true'
-    #   run: just install
-    #   working-directory: EcneProject 
-#    - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
-#      working-directory: EcneProject
-#    - run: julia --project=. src/Ecne.jl --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --name xor --sym ../generated/O0/XOR@gates@circomlib.sym | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
-#      working-directory: EcneProject
-  ## Install Picus
-    - name: Cache Racket dependencies
-      uses: actions/cache@v3
-      id: racketCache
+    - uses: actions/checkout@v1.0.0
+    - uses: julia-actions/setup-julia@v1
       with:
-        path: |
-         ~/.cache/racket
-         ~/.local/share/racket
-        key: ${{ runner.os }}-racket-current-8.6  
-    - name: Install Racket
-      uses: Bogdanp/setup-racket@v1.8.1
-      with:
-       architecture: 'x64'
-       distribution: 'full'
-       variant: 'CS'
-       version: '8.6' # Note: We could use current version here like in here: https://github.com/Bogdanp/setup-racket-cache-example/blob/master/.github/workflows/push.yml but then we need to tweak the caching
+        version: 1.7
+    - uses: julia-actions/cache@v1
+      id: juliaCache
+    - uses: extractions/setup-just@v1
     - uses: actions/checkout@v3
-      with:
-       repository: Veridise/Picus
-       path: Picus
-    - if: steps.racketCache.outputs.cache-hit != 'true'    
-      run: raco pkg install --auto --skip-installed rosette csv-reading
-    - if: steps.racketCache.outputs.cache-hit != 'true'    
-      run: brew install z3
-    - run:  ls -al
-      working-directory: Picus
-    - run: racket ./test-inc-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
-      working-directory: Picus
-    - run: racket ./test-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
-      working-directory: Picus
+      with: 
+        repository: franklynwang/EcneProject
+        path: EcneProject
+    - if: steps.juliaCache.outputs.cache-hit != 'true'
+      run: just install
+      working-directory: EcneProject 
+    - run: julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
+      working-directory: EcneProject
+    - run: julia --project=. src/Ecne.jl --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --name xor --sym ../generated/O0/XOR@gates@circomlib.sym | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
+      working-directory: EcneProject
+  ## Install Picus
+    # - name: Cache Racket dependencies
+    #   uses: actions/cache@v3
+    #   id: racketCache
+    #   with:
+    #     path: |
+    #      ~/.cache/racket
+    #      ~/.local/share/racket
+    #     key: ${{ runner.os }}-racket-current-8.6  
+    # - name: Install Racket
+    #   uses: Bogdanp/setup-racket@v1.8.1
+    #   with:
+    #    architecture: 'x64'
+    #    distribution: 'full'
+    #    variant: 'CS'
+    #    version: '8.6' # Note: We could use current version here like in here: https://github.com/Bogdanp/setup-racket-cache-example/blob/master/.github/workflows/push.yml but then we need to tweak the caching
+    # - uses: actions/checkout@v3
+    #   with:
+    #    repository: Veridise/Picus
+    #    path: Picus
+    # - if: steps.racketCache.outputs.cache-hit != 'true'    
+    #   run: raco pkg install --auto --skip-installed rosette csv-reading
+    # - if: steps.racketCache.outputs.cache-hit != 'true'    
+    #   run: brew install z3
+    # - run:  ls -al
+    #   working-directory: Picus
+    # - run: racket ./test-inc-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
+    #   working-directory: Picus
+    # - run: racket ./test-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
+    #   working-directory: Picus
       
     - name: Running Batch Commands
       run: ls -al
     - run: pwd
-    # - run: python batchRunECNE.py | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
+    - run: python batchRunECNE.py >> $GITHUB_STEP_SUMMARY
+
+    #- run: python batchRunECNE.py | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
     #- run: python batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
-    - run: python ../main/batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
-      working-directory: Picus
+    #- run: python ../main/batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
+    #  working-directory: Picus
       
   ## Process Output
     - name: Adding markdown
