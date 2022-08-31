@@ -22,10 +22,10 @@ for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True):
     if output.stdout.decode('utf-8').find('has sound constraints') != -1:
         #put this in the map
         circuitToStatus[rFileWithoutExtensionJustName] = 'sound constraints'
-        markdownOutput+=('\n|'+ rFileWithoutExtensionJustName + '| ECNE | :white_check_mark: |')
+        markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | ECNE | :white_check_mark: |')
     else:
         circuitToStatus[rFileWithoutExtensionJustName] = 'potentially unsound constraints'
-        markdownOutput+=('\n|'+ rFileWithoutExtensionJustName + '| ECNE | :x: |')
+        markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | ECNE | :x: |')
 
 # use Counter to count the number of each status
 statusCount = Counter(circuitToStatus.values())
