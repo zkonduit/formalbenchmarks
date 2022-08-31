@@ -7,11 +7,10 @@ from collections import Counter
 # Create a map 
 circuitToStatus = {}
 
-markdownOutput = """| Circuit | Tool | Sound Constraints? |
-| -------- | ---- | ---- |
-"""
+markdownOutput = """\n| Circuit | Tool | Sound Constraints? |
+| -------- | ---- | ---- | """
 
-for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True):
+for r1csFile in glob.glob('generated/O0/*IsEqual*.r1cs', recursive=True):
     #print(r1csFile)
     rFilePath = Path(r1csFile)
     rFileWithoutExtensionJustName = rFilePath.with_suffix('').name
