@@ -96,10 +96,13 @@ jobs:
       run: raco pkg install --auto --skip-installed rosette csv-reading
     - if: steps.racketCache.outputs.cache-hit != 'true'    
       run: brew install z3
-    - run:  ls -al
+    - name: ls and pwd
+      run:  ls -al
+    - run: pwd
+    - name: ls and al in picus
+      run: pwd
       working-directory: Picus
-    - run: pwd
-    - run: pwd
+    - run: ls -al
       working-directory: Picus
     - run: racket ./test-inc-uniqueness.rkt --r1cs ../main/generated/O0/XOR@gates@circomlib.r1cs
       working-directory: Picus
