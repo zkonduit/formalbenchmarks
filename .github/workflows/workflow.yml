@@ -92,6 +92,7 @@ jobs:
        repository: Veridise/Picus
        path: Picus
     - run: git checkout 1c4e2c5d90536c4fabff2358f52fa98377ea153f
+      working-directory: Picus
     - if: steps.racketCache.outputs.cache-hit != 'true'    
       run: raco pkg install --auto --skip-installed rosette csv-reading
     - if: steps.racketCache.outputs.cache-hit != 'true'    
