@@ -25,4 +25,4 @@ for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True): # PROD
     except subprocess.TimeoutExpired:
         # print("Timeout!!!!!!!!!", rFileWithoutExtensionJustName)
         markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | Picus | :alarm_clock: |')
-
+print(markdownOutput)
