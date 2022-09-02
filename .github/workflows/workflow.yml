@@ -117,7 +117,9 @@ jobs:
     #- run: python batchRunECNE.py | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
     #- run: python batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
     # - run: python ../main/batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
-    - run: python batchRunPicus.py >> $GITHUB_STEP_SUMMARY
+    #- run: python batchRunPicus.py >> $GITHUB_STEP_SUMMARY
+    - run: python batchRunPicus.py 
+
 
     #  working-directory: Picus
       
