@@ -15,7 +15,7 @@ for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True): # PROD
     #rFileWithSymExtension = rFilePath.with_suffix('.sym')
     try:
         #output = subprocess.run(["racket", "Picus/test-uniqueness.rkt","--r1cs", rFilePath, "--timeout", "10000"], timeout=600, capture_output=True)
-        subprocess.run(["racket", "Picus/test-uniqueness.rkt","--r1cs", rFilePath, "--timeout", "10000"], timeout=600)
+        subprocess.run(["racket", "Picus/test-inc-uniqueness.rkt","--r1cs", rFilePath, "--timeout", "3000"], timeout=600)
         #if output.stdout.decode('utf-8').find('verified') != -1:
             #put this in the map
         #    markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | Picus | :white_check_mark: |')
