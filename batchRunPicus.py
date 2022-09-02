@@ -14,7 +14,7 @@ for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True): # PROD
 
     #rFileWithSymExtension = rFilePath.with_suffix('.sym')
     try:
-        output = subprocess.run(["racket", "test-uniqueness.rkt","--r1cs", rFilePath, "--timeout", "10000"], timeout=600, capture_output=True)
+        output = subprocess.run(["racket", "Picus/test-uniqueness.rkt","--r1cs", rFilePath, "--timeout", "10000"], timeout=600, capture_output=True)
     
         if output.stdout.decode('utf-8').find('verified') != -1:
             #put this in the map
