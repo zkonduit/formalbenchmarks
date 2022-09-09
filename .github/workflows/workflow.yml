@@ -62,7 +62,8 @@ jobs:
     - uses: extractions/setup-just@v1
     - uses: actions/checkout@v3
       with: 
-        repository: franklynwang/EcneProject
+        #repository: franklynwang/EcneProject
+        repository: chyanju/Ecne
         path: EcneProject
     - if: steps.juliaCache.outputs.cache-hit != 'true'
       run: just install
@@ -117,7 +118,7 @@ jobs:
     #- run: python batchRunECNE.py | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
     #- run: python batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
     # - run: python ../main/batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
-    - run: python batchRunPicus.py >> $GITHUB_STEP_SUMMARY
+    # - run: python batchRunPicus.py >> $GITHUB_STEP_SUMMARY
     #- run: python batchRunPicus.py
 
 
