@@ -91,7 +91,7 @@ jobs:
     - uses: actions/checkout@v3
       with:
        repository: Veridise/Picus
-       ref: 1c4e2c5d90536c4fabff2358f52fa98377ea153f
+       #ref: 1c4e2c5d90536c4fabff2358f52fa98377ea153f
        path: Picus
     - if: steps.racketCache.outputs.cache-hit != 'true'    
       run: raco pkg install --auto --skip-installed rosette csv-reading
@@ -118,7 +118,7 @@ jobs:
     #- run: python batchRunECNE.py | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
     #- run: python batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
     # - run: python ../main/batchRunPicus.py | grep 'safey' >> $GITHUB_STEP_SUMMARY
-    # - run: python batchRunPicus.py >> $GITHUB_STEP_SUMMARY
+    - run: python batchRunPicus.py >> $GITHUB_STEP_SUMMARY
     #- run: python batchRunPicus.py
 
 
