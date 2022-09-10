@@ -105,10 +105,10 @@ jobs:
       working-directory: Picus
     - run: ls -al
       working-directory: Picus
-    - run: racket ./test-inc-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs
+    - run: racket ./test-v3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs
       working-directory: Picus
-    - run: racket ./test-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs
-      working-directory: Picus
+   # - run: racket ./test-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs
+   #   working-directory: Picus
       
     - name: Running Batch Commands
       run: ls -al
