@@ -21,8 +21,6 @@ jobs:
       ecneResults: ${{ steps.setEcneResults.outputs.results }}
     steps:
       - uses: actions/checkout@v3
-        with:
-          path: main
         name: checkoutFormalBenchmarksForEcne
       - uses: actions/checkout@v1.0.0
       - uses: julia-actions/setup-julia@v1
@@ -49,8 +47,6 @@ jobs:
       picusResults: $ {{ steps.setPicusResults.outputs.results }}
     steps:
       - uses: actions/checkout@v3
-        with:
-          path: main
         name: checkoutFormalBenchmarksForPicus
       - name: Cache Racket dependencies
         uses: actions/cache@v3
