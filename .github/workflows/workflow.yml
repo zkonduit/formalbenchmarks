@@ -55,14 +55,14 @@ jobs:
       - name: Install Racket
         uses: Bogdanp/setup-racket@v1.8.1
         with:
-        architecture: 'x64'
-        distribution: 'full'
-        variant: 'CS'
-        version: '8.6' # Note: We could use current version here like in here: https://github.com/Bogdanp/setup-racket-cache-example/blob/master/.github/workflows/push.yml but then we need to tweak the caching
+          architecture: 'x64'
+          distribution: 'full'
+          variant: 'CS'
+          version: '8.6' # Note: We could use current version here like in here: https://github.com/Bogdanp/setup-racket-cache-example/blob/master/.github/workflows/push.yml but then we need to tweak the caching
       - uses: actions/checkout@v3
         with:
-        repository: chyanju/Picus
-        path: Picus
+          repository: chyanju/Picus
+          path: Picus
       - if: steps.racketCache.outputs.cache-hit != 'true'    
         run: raco pkg install --auto --skip-installed rosette csv-reading
       - if: steps.racketCache.outputs.cache-hit != 'true'    
