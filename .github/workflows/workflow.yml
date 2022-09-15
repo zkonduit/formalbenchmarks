@@ -37,9 +37,13 @@ jobs:
       - if: steps.juliaCache.outputs.cache-hit != 'true'
         run: just install
         working-directory: EcneProject 
-      - run: echo "::set-output name=results::$(julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym | grep 'R1CS function')"
+      # - run: echo "::set-output name=results::$(julia --project=. src/Ecne.jl --r1cs target/division.r1cs --name division --sym target/division.sym | grep 'R1CS function')"
+      #   working-directory: EcneProject
+      #   id: setEcneResults
+      - run: echo "::set-output name=results::$(python batchRunECNE.py)"
         working-directory: EcneProject
         id: setEcneResults
+      
   ## Install Picus
   runPicus:
     runs-on: ubuntu-latest
@@ -79,15 +83,18 @@ jobs:
         working-directory: Picus
       - run: ls -al
         working-directory: Picus
-      - run: echo "::set-output name=results::$(racket ./test-v3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs | grep "Weak safety verified")"
+      # - run: echo "::set-output name=results::$(racket ./test-v3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs | grep "Weak safety verified")"
+      #   working-directory: Picus
+      #   id: setPicusResults
+      - run: echo "::set-output name=results::$(python batchRunPicus.py)"
         working-directory: Picus
-        id: setPicusResults
+        id: setPicusResultsResults
     # - run: racket ./test-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs
     #   working-directory: Picus
       
-      - name: Running Batch Commands
-        run: ls -al
-      - run: pwd
+      # - name: Running Batch Commands
+      #   run: ls -al
+      # - run: pwd
     # - run: python batchRunECNE.py >> $GITHUB_STEP_SUMMARY
 
     #- run: python batchRunECNE.py | grep 'R1CS function' >> $GITHUB_STEP_SUMMARY
