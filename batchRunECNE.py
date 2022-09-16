@@ -11,7 +11,7 @@ ECNECircuitToStatus = {}
 #| -------- | ---- | ---- | """
 
 for r1csFile in glob.glob('generated/O0/*XOR*.r1cs', recursive=True):
-    print("ecne", r1csFile)
+    #print("ecne", r1csFile)
     rFilePath = Path(r1csFile)
     rFileWithoutExtensionJustName = rFilePath.with_suffix('').name
     rFileWithSymExtension = rFilePath.with_suffix('.sym')
