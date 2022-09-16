@@ -21,10 +21,10 @@ for r1csFile in glob.glob('generated/O0/*XOR*.r1cs', recursive=True):
     # search for a string in the output
     if output.stdout.decode('utf-8').find('has sound constraints') != -1:
         #put this in the map
-        ECNECircuitToStatus[rFileWithoutExtensionJustName] = {'ECNE', 'Weakly Verified'} 
+        ECNECircuitToStatus[rFileWithoutExtensionJustName] = {"tool" : "ECNE", "result" : "Weakly Verified"} 
         #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | ECNE | :white_check_mark: |')
     else:
-        ECNECircuitToStatus[rFileWithoutExtensionJustName] = {'ECNE', 'Not Verified'}
+        ECNECircuitToStatus[rFileWithoutExtensionJustName] = {"tool" : "ECNE", "result" : "Not Verified"}
         #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | ECNE | :x: |')
 
 # use Counter to count the number of each status

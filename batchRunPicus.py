@@ -24,19 +24,19 @@ for r1csFile in glob.glob('../formalbenchmarks/generated/O0/*XOR*.r1cs', recursi
        # subprocess.run(["racket", "test-v3-uniqueness.rkt","--r1cs", r1csFile, "--weak", "--timeout", "3000"], timeout=600)
         if output.stdout.decode('utf-8').find('safety verified.') != -1:
             #put this in the map
-            picusCircuitToStatus[rFileWithoutExtensionJustName] = {'Picus v3/z3', 'Weakly Verified'}
+            picusCircuitToStatus[rFileWithoutExtensionJustName] = { "tool" : "Picus v3/z3", "result" : "Weakly Verified"}
             #print (rFileWithoutExtensionJustName + ' verified')
             #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | Picus | :white_check_mark: |')
         else:
             #print (rFileWithoutExtensionJustName + ' not verified')
             #put this in the map
-            picusCircuitToStatus[rFileWithoutExtensionJustName] = {'Picus v3/z3', 'Not Verified'}
+            picusCircuitToStatus[rFileWithoutExtensionJustName] = { "tool" : "Picus v3/z3", "result" : "Not Verified"}
             #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | Picus | :x: |')
     
     except subprocess.TimeoutExpired:
          #print("Timeout!!!!!!!!!", rFileWithoutExtensionJustName)
          #put this in the map
-         picusCircuitToStatus[rFileWithoutExtensionJustName] = {'Picus v3/z3', 'Timeout'}
+         picusCircuitToStatus[rFileWithoutExtensionJustName] = { "tool" : "Picus v3/z3", "result" : "Timeout"}
          #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | Picus | :alarm_clock: |')
 #print(markdownOutput)
 print (picusCircuitToStatus)
