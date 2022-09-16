@@ -106,7 +106,7 @@ jobs:
     needs: [runEcne, runPicus]
     steps:
       - name: Adding Markdown
-        run: echo ${{needs.runEcne.outputs.ecneResults}} ${{needs.runPicus.outputs.picusResults}}
+        run: python produceJobSummary.py ${{needs.runEcne.outputs.ecneResults}} ${{needs.runPicus.outputs.picusResults}} >> $GITHUB_STEP_SUMMARY
     
       
       
