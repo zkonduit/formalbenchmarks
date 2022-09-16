@@ -10,7 +10,7 @@ ECNECircuitToStatus = {}
 #markdownOutput = """\n| Circuit | Tool | Sound Constraints? |
 #| -------- | ---- | ---- | """
 
-for r1csFile in glob.glob('generated/O0/*XOR*.r1cs', recursive=True):
+for r1csFile in glob.glob('generated/O0/*OR*.r1cs', recursive=True):
     #print("ecne", r1csFile)
     rFilePath = Path(r1csFile)
     rFileWithoutExtensionJustName = rFilePath.with_suffix('').name
