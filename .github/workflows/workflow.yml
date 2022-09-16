@@ -101,7 +101,7 @@ jobs:
     #- run: python batchRunPicus.py
     #  working-directory: Picus
 
-runPicusV3Longer:
+  runPicusV3Longer:
     runs-on: ubuntu-latest
     outputs:
       picusResults: ${{ steps.setPicusV3LongerResults.outputs.results }}
