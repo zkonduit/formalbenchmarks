@@ -108,7 +108,7 @@ jobs:
       - uses: actions/checkout@v3
         name: checkoutFormalBenchmarksForJobSummary
       - name: Adding Markdown
-        run: python produceJobSummary.py ${{needs.runEcne.outputs.ecneResults}} ${{needs.runPicus.outputs.picusResults}} >> $GITHUB_STEP_SUMMARY
+        run: python produceJobSummary.py ${{needs.runEcne.outputs.ecneResults}} ${{needs.runPicus.outputs.picusResults}} 
     
       
       
