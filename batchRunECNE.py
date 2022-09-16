@@ -11,7 +11,7 @@ ECNECircuitToStatus = {}
 #| -------- | ---- | ---- | """
 
 for r1csFile in glob.glob('generated/O0/*XOR*.r1cs', recursive=True):
-    #print(r1csFile)
+    print("ecne", r1csFile)
     rFilePath = Path(r1csFile)
     rFileWithoutExtensionJustName = rFilePath.with_suffix('').name
     rFileWithSymExtension = rFilePath.with_suffix('.sym')
@@ -28,7 +28,6 @@ for r1csFile in glob.glob('generated/O0/*XOR*.r1cs', recursive=True):
         #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | ECNE | :x: |')
 
 # use Counter to count the number of each status
-statusCount = Counter(ECNECircuitToStatus.values())
 # print the results
 #print(markdownOutput)
 # print the map
