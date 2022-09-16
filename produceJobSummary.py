@@ -7,6 +7,8 @@ def main(*args):
     #print (args)
     circuitsToOutput = collections.defaultdict(list)
     toolList = []
+    resultToMarkdownMap = {"Weakly Verified" : ":white_check_mark:", "Not Verified" : ":x:", "Timeout" : ":alarm_clock:"}
+
     for arg in args[1:]:
         #print (arg)
         circuitToSpecificToolOutputDict = ast.literal_eval(arg)
@@ -30,7 +32,8 @@ def main(*args):
         markdownOutput+=('\n| ' + circuit + ' | ')
 
         for toolResults in circuitsToOutput[circuit]:
-            markdownOutput+=( toolResults["result"] + ' | ')
+            toolResult = toolResults["result"]
+            markdownOutput+=( resultToMarkdownMap[toolResult] + ' | ')
 
     print (markdownOutput)
 
