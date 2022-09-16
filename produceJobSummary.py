@@ -6,23 +6,31 @@ def main(*args):
     # for each of the args, combine into a single dictionary
     #print (args)
     circuitsToOutput = collections.defaultdict(list)
+    toolList = []
     for arg in args[1:]:
         #print (arg)
-        currDict = ast.literal_eval(arg)
+        circuitToSpecificToolOutputDict = ast.literal_eval(arg)
         #print (currDict)
         # iterate through currDict and append to circuitsToOutput
-
-        for key in currDict:
-            circuitsToOutput[key].append(currDict[key])
-    
+        currentTool = next(iter(circuitToSpecificToolOutputDict.values()))["tool"]
+        toolList.append(currentTool)
+        for circuitInToolSpecificDict in circuitToSpecificToolOutputDict:
+            circuitsToOutput[circuitInToolSpecificDict].append(circuitToSpecificToolOutputDict[circuitInToolSpecificDict])
+    #print (circuitsToOutput)
     # Create the markdown output
-    markdownOutput = """\n| Circuit | Tool | Sound Constraints? |
-| -------- | ---- | ---- | """
+
+    # This feels very fragile. I'm sure there's a better way to do this.
+    markdownOutput = """\n| Circuit | """
+    for tool in toolList:
+        markdownOutput += tool + " | "
+    markdownOutput += "\n| -------- | "
+    for tool in toolList:
+        markdownOutput += "---- | "
     for circuit in circuitsToOutput:
         markdownOutput+=('\n| ' + circuit + ' | ')
 
         for toolResults in circuitsToOutput[circuit]:
-            markdownOutput+=(toolResults["tool"] + ' | ' + toolResults["result"] + ' |')
+            markdownOutput+=( toolResults["result"] + ' | ')
 
     print (markdownOutput)
 
