@@ -86,7 +86,7 @@ jobs:
       #   working-directory: Picus
       #   id: setPicusResults
       - run: echo "::set-output name=results::$(python batchRunPicus.py)"
-        id: setPicusResultsResults
+        id: setPicusResults
     # - run: racket ./test-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs
     #   working-directory: Picus
       
