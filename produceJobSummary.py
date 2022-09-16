@@ -7,6 +7,7 @@ def main(*args):
     print (args)
     circuitsToOutput = collections.defaultdict(list)
     for arg in args[1:]:
+        print (arg)
         currDict = ast.literal_eval(arg)
         print (currDict)
         # iterate through currDict and append to circuitsToOutput
