@@ -4,12 +4,12 @@ import ast
 
 def main(*args):
     # for each of the args, combine into a single dictionary
-    print (args)
+    #print (args)
     circuitsToOutput = collections.defaultdict(list)
     for arg in args[1:]:
-        print (arg)
+        #print (arg)
         currDict = ast.literal_eval(arg)
-        print (currDict)
+        #print (currDict)
         # iterate through currDict and append to circuitsToOutput
 
         for key in currDict:
@@ -19,10 +19,10 @@ def main(*args):
     markdownOutput = """\n| Circuit | Tool | Sound Constraints? |
 | -------- | ---- | ---- | """
     for circuit in circuitsToOutput:
-        markdownOut+=('\n| ' + circuit + ' | ')
+        markdownOutput+=('\n| ' + circuit + ' | ')
 
         for toolResults in circuitsToOutput[circuit]:
-            markdownOut+=(toolResults["tool"] + ' | ' + toolResults["result"] + ' |')
+            markdownOutput+=(toolResults["tool"] + ' | ' + toolResults["result"] + ' |')
 
     print (markdownOutput)
 
