@@ -41,7 +41,6 @@ jobs:
       #   working-directory: EcneProject
       #   id: setEcneResults
       - run: echo "::set-output name=results::$(python batchRunECNE.py)"
-        working-directory: EcneProject
         id: setEcneResults
       
   ## Install Picus
@@ -87,7 +86,6 @@ jobs:
       #   working-directory: Picus
       #   id: setPicusResults
       - run: echo "::set-output name=results::$(python batchRunPicus.py)"
-        working-directory: Picus
         id: setPicusResultsResults
     # - run: racket ./test-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs
     #   working-directory: Picus
