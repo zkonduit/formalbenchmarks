@@ -101,14 +101,58 @@ jobs:
     #- run: python batchRunPicus.py
     #  working-directory: Picus
 
+runPicusV3Longer:
+    runs-on: ubuntu-latest
+    outputs:
+      picusResults: ${{ steps.setPicusV3LongerResults.outputs.results }}
+    steps:
+      - uses: actions/checkout@v3
+        name: checkoutFormalBenchmarksForPicus
+      - name: Cache Racket dependencies
+        uses: actions/cache@v3
+        id: racketCache
+        with:
+          path: |
+            ~/.cache/racket
+            ~/.local/share/racket
+          key: ${{ runner.os }}-racket-current-8.6  
+      - name: Install Racket
+        uses: Bogdanp/setup-racket@v1.8.1
+        with:
+          architecture: 'x64'
+          distribution: 'full'
+          variant: 'CS'
+          version: '8.6' # Note: We could use current version here like in here: https://github.com/Bogdanp/setup-racket-cache-example/blob/master/.github/workflows/push.yml but then we need to tweak the caching
+      - uses: actions/checkout@v3
+        with:
+          repository: chyanju/Picus
+          path: Picus
+      - if: steps.racketCache.outputs.cache-hit != 'true'    
+        run: raco pkg install --auto --skip-installed rosette csv-reading
+      - if: steps.racketCache.outputs.cache-hit != 'true'    
+        run: brew install z3
+      - name: ls and pwd
+        run:  ls -al
+      - run: pwd
+      - name: ls and al in picus
+        run: pwd
+        working-directory: Picus
+      - run: ls -al
+        working-directory: Picus
+      # - run: echo "::set-output name=results::$(racket ./test-v3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs | grep "Weak safety verified")"
+      #   working-directory: Picus
+      #   id: setPicusResults
+      - run: echo "::set-output name=results::$(python batchRunPicusV3Longer.py)"
+        id: setPicusV3LongerResults
+
   populateReport:
     runs-on: ubuntu-latest
-    needs: [runEcne, runPicus]
+    needs: [runEcne, runPicus, runPicusV3Longer]
     steps:
       - uses: actions/checkout@v3
         name: checkoutFormalBenchmarksForJobSummary
       - name: Adding Markdown
-        run: python produceJobSummary.py "${{needs.runEcne.outputs.ecneResults}}" "${{needs.runPicus.outputs.picusResults}}" >> $GITHUB_STEP_SUMMARY
+        run: python produceJobSummary.py "${{needs.runEcne.outputs.ecneResults}}" "${{needs.runPicus.outputs.picusResults}}" "${{needs.runPicusV3Longer.outputs.picusResults}}" >> $GITHUB_STEP_SUMMARY
     
       
       
