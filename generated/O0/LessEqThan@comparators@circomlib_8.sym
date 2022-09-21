@@ -1,0 +1,16 @@
+1,1,2,main.out
+2,2,2,main.in[0]
+3,3,2,main.in[1]
+4,4,1,main.lt.out
+5,5,1,main.lt.in[0]
+6,6,1,main.lt.in[1]
+7,7,0,main.lt.n2b.out[0]
+8,8,0,main.lt.n2b.out[1]
+9,9,0,main.lt.n2b.out[2]
+10,10,0,main.lt.n2b.out[3]
+11,11,0,main.lt.n2b.out[4]
+12,12,0,main.lt.n2b.out[5]
+13,13,0,main.lt.n2b.out[6]
+14,14,0,main.lt.n2b.out[7]
+15,15,0,main.lt.n2b.out[8]
+16,16,0,main.lt.n2b.in
