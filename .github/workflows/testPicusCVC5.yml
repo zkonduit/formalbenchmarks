@@ -1,0 +1,57 @@
+# This is a basic workflow to help you get started with Actions
+
+name: test Picus CVC5
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  runPicus:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: checkoutFormalBenchmarksForPicus
+      - name: Cache Racket dependencies
+        uses: actions/cache@v3
+        id: racketCache
+        with:
+          path: |
+            ~/.cache/racket
+            ~/.local/share/racket
+          key: ${{ runner.os }}-racket-current-8.6  
+      - name: Install Racket
+        uses: Bogdanp/setup-racket@v1.8.1
+        with:
+          architecture: 'x64'
+          distribution: 'full'
+          variant: 'CS'
+          version: '8.6' # Note: We could use current version here like in here: https://github.com/Bogdanp/setup-racket-cache-example/blob/master/.github/workflows/push.yml but then we need to tweak the caching
+      - uses: actions/checkout@v3
+        with:
+          repository: chyanju/Picus
+          path: Picus
+      - if: steps.racketCache.outputs.cache-hit != 'true'    
+        run: raco pkg install --auto --skip-installed rosette csv-reading
+      - if: steps.racketCache.outputs.cache-hit != 'true'    
+        run: brew install z3
+      - name: ls and pwd
+        run:  ls -al
+      - run: pwd
+      - name: ls and al in picus
+        run: pwd
+        working-directory: Picus
+      - run: ls -al
+        working-directory: Picus
+      - run: racket ./test-v3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --solver cvc5
+        working-directory: Picus
+
