@@ -60,6 +60,8 @@ jobs:
         name: make cocoa
       - name: pwd
         run: pwd
+      - name: install toml
+        run: pip install toml
       - name: ls -al
         run: ls -al
       - run: ./configure.sh --cocoa --auto-download
