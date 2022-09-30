@@ -68,9 +68,11 @@ jobs:
         name: configure CVC4 build
       - name: ls -al
         run: ls -al
+      - name: pwd
+        run: pwd
       - run: make
         name: make CVC4 build
-        working-directory: CVC4/build
+        working-directory: build
       - name: ls -al
         run: ls -al
       - run: patch CVC4/cmake/deps-utils/CoCoALib-0.99800-trace.patch CoCoALib/
