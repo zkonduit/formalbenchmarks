@@ -58,6 +58,21 @@ jobs:
       - run: make
         working-directory: CoCoALib-0.99800
         name: make cocoa
+      - name: pwd
+        run: pwd
+      - name: ls -al
+        run: ls -al
+      - run: ./configure.sh --cocoa --auto-download
+        working-directory: CVC4/build
+        name: configure CVC4 build
+      - run: patch CVC4/cmake/deps-utils/CoCoALib-0.99800-trace.patch CoCoALib/
+        working-directory: CVC4
+      - run: ./configure
+        working-directory: CoCoALib-0.99800
+        name: configure cocoa after patch
+      - run: make
+        working-directory: CoCoALib-0.99800
+        name: make cocoa after patch     
         
 
       - uses: actions/checkout@v3
