@@ -48,6 +48,9 @@ jobs:
         run: tar -xzf CoCoALib-0.99800.tgz
       - name: ls -al
         run: ls -al
+      - name: ls -al
+        run: ls -al
+        working-directory: CocoALib-0.99800
         
       - run: ./configure
         working-directory: CocoALib-0.99800
