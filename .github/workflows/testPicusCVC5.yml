@@ -44,6 +44,7 @@ jobs:
         run: wget -P ./cocoa "https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz"
       - run: pwd
       - run: ls -al
+        working-directory: cocoa
       - run: ./configure
         working-directory: cocoa
         name: configure cocoa
