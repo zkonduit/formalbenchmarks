@@ -38,7 +38,7 @@ jobs:
           version: '8.6' # Note: We could use current version here like in here: https://github.com/Bogdanp/setup-racket-cache-example/blob/master/.github/workflows/push.yml but then we need to tweak the caching
       - uses: actions/checkout@v3
         with:
-          repository: alex-ozdemir/CVC4/
+          repository: alex-ozdemir/CVC4
           ref: ddcecc5
       - name: Download cocoa
         run: curl https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz 
