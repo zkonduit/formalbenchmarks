@@ -41,15 +41,14 @@ jobs:
           repository: alex-ozdemir/CVC4
           ref: ddcecc5ee3281831953ea04ba127c80d08122dad
       - name: Download cocoa
-        run: wget -P ./cocoa "https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz"
-      - run: pwd
-      - run: ls -al
-        working-directory: cocoa
+        run: wget "https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz"
+      - name: unzip cocoa
+        run: tar xzf CoCoALib-0.99800.tgz
       - run: ./configure
-        working-directory: cocoa
+        working-directory: CocoALib-0.99800.tgz
         name: configure cocoa
       - run: make
-        working-directory: cocoa
+        working-directory: CocoALib-0.99800.tgz
         name: make cocoa
         
 
