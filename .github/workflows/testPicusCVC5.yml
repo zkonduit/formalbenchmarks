@@ -39,7 +39,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: alex-ozdemir/CVC4
-          ref: ddcecc5
+          ref: ddcecc5ee3281831953ea04ba127c80d08122dad
       - name: Download cocoa
         run: curl https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz 
       - run: pwd
