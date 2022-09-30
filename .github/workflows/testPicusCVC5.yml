@@ -66,6 +66,8 @@ jobs:
         run: ls -al
       - run: ./configure.sh --cocoa --auto-download
         name: configure CVC4 build
+      - name: ls -al
+        run: ls -al
       - run: make
         name: make CVC4 build
         working-directory: CVC4/build
