@@ -41,9 +41,15 @@ jobs:
           repository: alex-ozdemir/CVC4
           ref: ddcecc5ee3281831953ea04ba127c80d08122dad
       - name: Download cocoa
-        run: curl https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz 
+        run: curl https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz -o cocoa
       - run: pwd
       - run: ls -al
+      - run: ./configure
+        working-directory: cocoa
+        name: configure cocoa
+      - run: make
+        working-directory: cocoa
+        name: make cocoa
         
 
       - uses: actions/checkout@v3
