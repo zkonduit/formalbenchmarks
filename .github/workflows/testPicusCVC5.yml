@@ -42,8 +42,11 @@ jobs:
           ref: ddcecc5ee3281831953ea04ba127c80d08122dad
       - name: Download cocoa
         run: wget "https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz"
+      - name: ls -al
+        run: ls -al
       - name: unzip cocoa
-        run: tar xzf CoCoALib-0.99800.tgz
+        run: tar -xzf CoCoALib-0.99800.tgz
+        
       - run: ./configure
         working-directory: CocoALib-0.99800.tgz
         name: configure cocoa
