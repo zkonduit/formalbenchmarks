@@ -94,7 +94,7 @@ jobs:
         run: ls -al
         working-directory: libpoly
       - name: libpoly cmake
-        run: cmake .. -DCMAKE_BUILD_TYPE=Debug
+        run: cmake .. -DCMAKE_BUILD_TYPE=Debug --auto-download
         working-directory: libpoly
       - name: libpoly make
         run: make
