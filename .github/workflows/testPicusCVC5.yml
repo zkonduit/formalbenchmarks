@@ -85,7 +85,7 @@ jobs:
         name: make cocoa after patch
       - uses: actions/checkout@v3
         with:
-          repository: https://github.com/SRI-CSL/libpoly.git
+          repository: SRI-CSL/libpoly
           path: libpoly
       - name: pwd
         run: pwd
