@@ -76,7 +76,6 @@ jobs:
       - name: ls -al
         run: ls -al
       - run: patch CVC4/cmake/deps-utils/CoCoALib-0.99800-trace.patch CoCoALib/
-        working-directory: CVC4
       - run: ./configure
         working-directory: CoCoALib-0.99800
         name: configure cocoa after patch
