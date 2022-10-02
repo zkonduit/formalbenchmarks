@@ -106,12 +106,13 @@ jobs:
         run: pwd
       - name: ls -al
         run: ls -al
+      - name: ls -al build
+        run: ls -al
+        working-directory: build
       - name: back to cvc4 install
         run: ./configure.sh --cocoa --auto-download
-        working-directory: build
       - name: make j4 install
         run: make -j4 install
-        working-directory: build
       - name: which cvc5
         run: which cvc5
       - uses: actions/checkout@v3
