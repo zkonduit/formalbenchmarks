@@ -100,7 +100,7 @@ jobs:
         run: make
         working-directory: libpoly/build
       - name: libpoly make install
-        run: make install
+        run: sudo make install
         working-directory: libpoly/build
       - name: pwd
         run: pwd
