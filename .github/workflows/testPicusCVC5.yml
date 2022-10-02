@@ -94,14 +94,14 @@ jobs:
         run: ls -al
         working-directory: libpoly
       - name: libpoly cmake
-        run: cmake .. -DCMAKE_BUILD_TYPE=Production
-        working-directory: libpoly
+        run: cmake .. -DCMAKE_BUILD_TYPE=Release
+        working-directory: libpoly/build
       - name: libpoly make
         run: make
-        working-directory: libpoly
+        working-directory: libpoly/build
       - name: libpoly make install
         run: make install
-        working-directory: libpoly
+        working-directory: libpoly/build
       - name: pwd
         run: pwd
       - name: ls -al
