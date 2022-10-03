@@ -40,6 +40,7 @@ jobs:
         with:
           repository: alex-ozdemir/CVC4
           ref: ddcecc5ee3281831953ea04ba127c80d08122dad
+          path: 'CVC4'
       - name: ls -al after checking out CVC4
         run: ls -al   
       - name: pwd
