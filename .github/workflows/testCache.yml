@@ -30,9 +30,8 @@ jobs:
         id: testCache
         with:
           path: |
-            ~/.cache/racket
-            ~/.local/share/racket
-          key: ${{ runner.os }}-cocoa 
+            CVC4
+          key: ${{ runner.os }}-CVC4
           
       - if: steps.testCache.outputs.cache-hit != 'true'    
         run: echo "not in cache"
@@ -47,13 +46,16 @@ jobs:
         run: pwd
       - name: Download cocoa
         run: wget "https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz"
+        working-directory: CVC4
       - name: ls -al
         run: ls -al
+        working-directory: CVC4        
       - name: unzip cocoa
         run: tar -xzf CoCoALib-0.99800.tgz
+        working-directory: CVC4
       - name: ls -al
         run: ls -al
       - name: ls -al
         run: ls -al
-        working-directory: CoCoALib-0.99800
+        working-directory: CVC4/CoCoALib-0.99800
 
