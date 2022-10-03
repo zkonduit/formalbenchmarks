@@ -35,18 +35,28 @@ jobs:
           
       - if: steps.testCache.outputs.cache-hit != 'true'    
         run: echo "not in cache"
-      - uses: actions/checkout@v3
+      - if: steps.testCache.outputs.cache-hit != 'true'    
+        uses: actions/checkout@v3
         with:
           repository: alex-ozdemir/CVC4
           ref: ddcecc5ee3281831953ea04ba127c80d08122dad
           path: 'CVC4'
-      - name: ls -al after checking out CVC4
+      - name: ls -al after restoring CVC4
         run: ls -al   
       - name: pwd
         run: pwd
-      - name: Download cocoa
+      - name: ls -al after restoring CVC4 in CVC4
+        run: ls -al   
+        working-directory: CVC4
+      - name: pwd
+        run: pwd  
+        working-directory: CVC4
+        
+      - if: steps.testCache.outputs.cache-hit != 'true'    
         run: wget "https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz"
         working-directory: CVC4
+        name: Restore Cocoa from cache
+
       - name: ls -al
         run: ls -al
         working-directory: CVC4        
