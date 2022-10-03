@@ -113,6 +113,7 @@ jobs:
         run: ./configure.sh --cocoa --auto-download
       - name: make j4 install
         run: make -j4 install
+        working-directory: build
       - name: which cvc5
         run: which cvc5
       - uses: actions/checkout@v3
