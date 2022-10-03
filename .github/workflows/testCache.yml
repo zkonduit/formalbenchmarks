@@ -34,10 +34,8 @@ jobs:
             ~/.local/share/racket
           key: ${{ runner.os }}-cocoa 
           
-      - if: steps.racketCache.outputs.cache-hit != 'true'    
-        run: raco pkg install --auto --skip-installed rosette csv-reading
-      - if: steps.racketCache.outputs.cache-hit != 'true'    
-        run: brew install z3    
+      - if: steps.testCache.outputs.cache-hit != 'true'    
+        run: echo "not in cache"
       - uses: actions/checkout@v3
         with:
           repository: alex-ozdemir/CVC4
