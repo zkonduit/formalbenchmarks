@@ -132,6 +132,6 @@ jobs:
         working-directory: Picus
       - run: ls -al
         working-directory: Picus
-      - run: racket ./test-v3-uniqueness.rkt --r1cs circomlib/XOR@gates.r1cs --solver cvc5
+      - run: racket ./test-v3-uniqueness.rkt --r1cs benchmarks/circomlib/XOR@gates.r1cs --solver cvc5
         working-directory: Picus
 
