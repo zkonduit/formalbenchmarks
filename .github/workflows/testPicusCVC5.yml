@@ -77,6 +77,9 @@ jobs:
         run: pwd
       - name: ls -al
         run: ls -al
+      - name: ls -al
+        run: ls -al
+        working-directory: CVC4
       - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         run: ./configure.sh --cocoa --auto-download
         name: configure CVC4 build
