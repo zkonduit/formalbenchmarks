@@ -36,13 +36,13 @@ jobs:
             CVC4/CoCoALib-0.99800
             CVC4/CoCoALib-0.99800.tgz
           key: ${{ runner.os }}-cocoa
-      - name: libpoly Cache
-        uses: actions/cache@v3
-        id: libpolyCache
-        with:
-          path: |
-            libpoly
-          key: ${{ runner.os }}-libpoly
+      #- name: libpoly Cache
+      #  uses: actions/cache@v3
+      #  id: libpolyCache
+      #  with:
+      #    path: |
+      #      libpoly
+      #    key: ${{ runner.os }}-libpoly
       - name: Cache Racket dependencies
         uses: actions/cache@v3
         id: racketCache
@@ -83,6 +83,7 @@ jobs:
       - run: |
           ls -al
           make
+          ls -al
         name: make CVC4 build
         working-directory: CVC4/build
       - run: |
@@ -94,62 +95,48 @@ jobs:
           ./configure
         working-directory: CVC4/CoCoALib-0.99800
         name: configure cocoa after patch
-      - run: 
+      - run: |
           ls -al
           make
         working-directory: CVC4/CoCoALib-0.99800
         name: make cocoa after patch
-  #    - uses: actions/checkout@v3
-  #      with:
-   #       repository: SRI-CSL/libpoly
-  #        path: libpoly
-  #    - name: ls -al in libpoly
-  #      run: |
-  #        pwd
-   #       ls -al
-  #        cd libpoly/build
-  #        ls -al
-   #     working-directory: libpoly
-    #  - if: steps.libpolyCache.outputs.cache-hit != 'true'
-    #    name: libpoly cmake
-    #    run: | 
-    #      cmake .. -DCMAKE_BUILD_TYPE=Release
-    #      make
-    #    working-directory: libpoly/build
-    #  - name: libpoly make install
-    #    run: sudo make install
-    #    working-directory: libpoly/build
-    #  - name: pwd
-    #    run: pwd
-    #  - name: ls -al
-    #    run: ls -al
-    #  - name: ls -al CVC4
-    #    run: ls -al
-    #    working-directory: CVC4
-    #  - name: back to cvc4 install
-    #    run: ./configure.sh --cocoa --auto-download
-    #    working-directory: CVC4
-    #  - name: make j4 install
-    #    run: sudo make -j4 install
-    #    working-directory: CVC4
-    #  - name: which cvc5
-    #    run: which cvc5
-  #    - uses: actions/checkout@v3
-  #      with:
-  #        repository: chyanju/Picus
-  #        path: Picus
-  #    - if: steps.racketCache.outputs.cache-hit != 'true'    
-  #      run: raco pkg install --auto --skip-installed rosette csv-reading
-  #    - if: steps.racketCache.outputs.cache-hit != 'true'    
-  #      run: brew install z3
-  #    - name: ls and pwd
-  #      run:  ls -al
-  #    - run: pwd
-  #    - name: ls and al in picus
-  #      run: pwd
-  #      working-directory: Picus
-  #    - run: ls -al
-  #      working-directory: Picus
-  #    - run: racket ./test-v3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --solver cvc5
-  #      working-directory: Picus
+      - uses: actions/checkout@v3
+        with:
+          repository: SRI-CSL/libpoly
+          path: libpoly
+      - name: ls -al in libpoly
+        run: |
+          pwd
+          ls -al
+          cd libpoly/build
+          ls -al
+        working-directory: libpoly
+      - name: libpoly cmake
+        run: | 
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+          make
+        working-directory: libpoly/build
+      - name: libpoly make install
+        run: sudo make install
+        working-directory: libpoly/build
+      - name: back to cvc4 install
+        run: |
+         ls -al
+         ./configure.sh --cocoa --auto-download
+        working-directory: CVC4
+      - name: make j4 install
+        run: sudo make -j4 install
+        working-directory: CVC4
+      - name: which cvc5
+        run: which cvc5
+      - uses: actions/checkout@v3
+        with:
+          repository: chyanju/Picus
+          path: Picus
+      - if: steps.racketCache.outputs.cache-hit != 'true'    
+        run: raco pkg install --auto --skip-installed rosette csv-reading
+      - if: steps.racketCache.outputs.cache-hit != 'true'    
+        run: brew install z3
+      - run: racket ./test-v3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs --solver cvc5
+        working-directory: Picus
 
