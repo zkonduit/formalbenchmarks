@@ -127,9 +127,9 @@ jobs:
         run: pwd
       - name: ls -al
         run: ls -al
-      - name: ls -al build
+      - name: ls -al CVC4
         run: ls -al
-        working-directory: build
+        working-directory: CVC4
       - name: back to cvc4 install
         run: ./configure.sh --cocoa --auto-download
         working-directory: CVC4
