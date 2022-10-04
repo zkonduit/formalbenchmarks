@@ -56,37 +56,14 @@ jobs:
           repository: alex-ozdemir/CVC4
           ref: ddcecc5ee3281831953ea04ba127c80d08122dad
           path: 'CVC4'
-      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
-        run: wget "https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz"
+      - run: |
+          wget "https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz"
+          tar -xzf CoCoALib-0.99800.tgz
+          ./CoCoALib-0.99800/configure
+          ./CoCoALib-0.99800/make
         working-directory: CVC4
-        name: Restore Cocoa from cache
-
-      - name: ls -al
-        run: ls -al
-      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
-        name: unzip cocoa
-        run: tar -xzf CoCoALib-0.99800.tgz
-        working-directory: CVC4
-      - name: ls -al
-        run: ls -al
-      - name: ls -al
-        run: ls -al
-        working-directory: CVC4/CoCoALib-0.99800
-      - if: steps.cvc4Cache.outputs.cache-hit != 'true'            
-        run: ./configure
-        working-directory: CVC4/CoCoALib-0.99800
-        name: configure cocoa
-      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
-        run: make
-        working-directory: CVC4/CoCoALib-0.99800
-        name: make cocoa
-      - name: pwd
-        run: pwd
-      - name: ls -al
-        run: ls -al
-      - name: ls -al
-        run: ls -al
-        working-directory: CVC4
+        name: build cocoa
+        
       - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         run: ./configure.sh --cocoa --auto-download
         name: configure CVC4 build
@@ -119,12 +96,6 @@ jobs:
         with:
           repository: SRI-CSL/libpoly
           path: libpoly
-      - name: pwd
-        run: pwd
-        working-directory: libpoly
-      - name: ls -al
-        run: ls -al
-        working-directory: libpoly
       - if: steps.libpolyCache.outputs.cache-hit != 'true'
         name: libpoly cmake
         run: | 
@@ -141,14 +112,14 @@ jobs:
       - name: ls -al CVC4
         run: ls -al
         working-directory: CVC4
-  #    - name: back to cvc4 install
-  #      run: ./configure.sh --cocoa --auto-download
-  #      working-directory: CVC4
-  #    - name: make j4 install
-  #      run: sudo make -j4 install
-  #      working-directory: CVC4
-  #    - name: which cvc5
-  #      run: which cvc5
+      - name: back to cvc4 install
+        run: ./configure.sh --cocoa --auto-download
+        working-directory: CVC4
+      - name: make j4 install
+        run: sudo make -j4 install
+        working-directory: CVC4
+      - name: which cvc5
+        run: which cvc5
   #    - uses: actions/checkout@v3
   #      with:
   #        repository: chyanju/Picus
