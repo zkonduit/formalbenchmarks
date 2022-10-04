@@ -59,7 +59,7 @@ jobs:
       - run: |
           wget "https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz"
           tar -xzf CoCoALib-0.99800.tgz
-          ./CoCoALib-0.99800/configure
+          ./CoCoALib-0.99800/configure.sh
           ./CoCoALib-0.99800/make
         working-directory: CVC4
         name: build cocoa
