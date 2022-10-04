@@ -75,15 +75,15 @@ jobs:
         name: make cocoa
       - name: pwd
         run: pwd
-      - name: install toml
-        run: pip install toml
-        working-directory: CVC4/build
       - name: ls -al
         run: ls -al
       - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         run: ./configure.sh --cocoa --auto-download
         name: configure CVC4 build
-        working-directory: CVC4        
+        working-directory: CVC4
+      - name: install toml
+        run: pip install toml
+        working-directory: CVC4/build
       - name: ls -al
         run: ls -al
       - name: pwd
