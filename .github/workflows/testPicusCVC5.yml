@@ -75,18 +75,11 @@ jobs:
         name: build Cocoa
       - run: |
           ls -al
+          pip install toml
+          ls -al
           ./configure.sh --cocoa --auto-download
         name: configure CVC4 build
         working-directory: CVC4
-      - name: |
-          ls -al
-          install toml
-        run: pip install toml
-        working-directory: CVC4
-      - name: ls -al
-        run: ls -al
-      - name: pwd
-        run: pwd
       - run: |
           ls -al
           make
