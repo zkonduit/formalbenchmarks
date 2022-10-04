@@ -59,11 +59,11 @@ jobs:
       - run: |
           wget "https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz"
           tar -xzf CoCoALib-0.99800.tgz
-          ./CoCoALib-0.99800/configure.sh
-          ./CoCoALib-0.99800/make
+          cd CoCoALib-0.99800
+          ./configure
+          make
         working-directory: CVC4
-        name: build cocoa
-        
+        name: build Cocoa
       - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         run: ./configure.sh --cocoa --auto-download
         name: configure CVC4 build
