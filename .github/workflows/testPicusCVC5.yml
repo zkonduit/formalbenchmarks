@@ -73,32 +73,37 @@ jobs:
           make
         working-directory: CVC4
         name: build Cocoa
-      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
-        run: ./configure.sh --cocoa --auto-download
+      - run: |
+          ls -al
+          ./configure.sh --cocoa --auto-download
         name: configure CVC4 build
         working-directory: CVC4
-      - name: install toml
+      - name: |
+          ls -al
+          install toml
         run: pip install toml
         working-directory: CVC4
       - name: ls -al
         run: ls -al
       - name: pwd
         run: pwd
-      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
-        run: make
+      - run: |
+          ls -al
+          make
         name: make CVC4 build
         working-directory: CVC4
-      - name: ls -al
-        run: ls -al
-      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
-        run: git apply < ../cmake/deps-utils/CoCoALib-0.99800-trace.patch
+      - run: |
+          ls -al
+          git apply < ../cmake/deps-utils/CoCoALib-0.99800-trace.patch
         working-directory: CVC4/CoCoALib-0.99800
-      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
-        run: ./configure
+      - run: |
+          ls -al
+          ./configure
         working-directory: CVC4/CoCoALib-0.99800
         name: configure cocoa after patch
-      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
-        run: make
+      - run: 
+          ls -al
+          make
         working-directory: CVC4/CoCoALib-0.99800
         name: make cocoa after patch
   #    - uses: actions/checkout@v3
