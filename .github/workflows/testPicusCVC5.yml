@@ -77,6 +77,7 @@ jobs:
         run: pwd
       - name: install toml
         run: pip install toml
+        working-directory: CVC4/build
       - name: ls -al
         run: ls -al
       - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
