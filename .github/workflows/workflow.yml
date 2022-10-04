@@ -101,13 +101,35 @@ jobs:
     #- run: python batchRunPicus.py
     #  working-directory: Picus
 
-  runPicusV3Longer:
+  runPicusV3CVC5:
     runs-on: ubuntu-latest
     outputs:
       picusResults: ${{ steps.setPicusV3LongerResults.outputs.results }}
     steps:
       - uses: actions/checkout@v3
         name: checkoutFormalBenchmarksForPicus
+      - name: CVC4 Cache
+        uses: actions/cache@v3
+        id: cvc4Cache
+        with:
+          path: |
+            CVC4
+          key: ${{ runner.os }}-CVC4
+      - name: cocoaCache
+        uses: actions/cache@v3
+        id: cocoaCache
+        with:
+          path: |
+            CVC4/CoCoALib-0.99800
+            CVC4/CoCoALib-0.99800.tgz
+          key: ${{ runner.os }}-cocoa
+      #- name: libpoly Cache
+      #  uses: actions/cache@v3
+      #  id: libpolyCache
+      #  with:
+      #    path: |
+      #      libpoly
+      #    key: ${{ runner.os }}-libpoly
       - name: Cache Racket dependencies
         uses: actions/cache@v3
         id: racketCache
@@ -123,36 +145,105 @@ jobs:
           distribution: 'full'
           variant: 'CS'
           version: '8.6' # Note: We could use current version here like in here: https://github.com/Bogdanp/setup-racket-cache-example/blob/master/.github/workflows/push.yml but then we need to tweak the caching
+      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
+        uses: actions/checkout@v3
+        with:
+          repository: alex-ozdemir/CVC4
+          ref: ddcecc5ee3281831953ea04ba127c80d08122dad
+          path: 'CVC4'
+      - if: steps.cocoaCache.outputs.cache-hit != 'true'
+        run: |
+          wget "https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz"
+          tar -xzf CoCoALib-0.99800.tgz
+          cd CoCoALib-0.99800
+          ./configure
+          make
+        working-directory: CVC4
+        name: build Cocoa
+      - run: |
+          ls -al
+          pip install toml
+          ls -al
+          ./configure.sh --cocoa --auto-download
+        name: configure CVC4 build
+        working-directory: CVC4
+      - run: |
+          ls -al
+          make
+          ls -al
+        name: make CVC4 build
+        working-directory: CVC4/build
+      - run: |
+          ls -al
+          git apply < ../cmake/deps-utils/CoCoALib-0.99800-trace.patch
+        working-directory: CVC4/CoCoALib-0.99800
+      - run: |
+          ls -al
+          ./configure
+        working-directory: CVC4/CoCoALib-0.99800
+        name: configure cocoa after patch
+      - run: |
+          ls -al
+          make
+        working-directory: CVC4/CoCoALib-0.99800
+        name: make cocoa after patch
+      - uses: actions/checkout@v3
+        with:
+          repository: SRI-CSL/libpoly
+          path: libpoly
+      - name: ls -al in libpoly
+        run: |
+          pwd
+          ls -al
+          cd build
+          ls -al
+        working-directory: libpoly
+      - name: libpoly cmake
+        run: | 
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+          make
+        working-directory: libpoly/build
+      - name: libpoly make install
+        run: sudo make install
+        working-directory: libpoly/build
+      - name: back to cvc4 install
+        run: |
+         ls -al
+         ls -al build
+         ./configure.sh --cocoa --auto-download
+         ls -al
+         ls -al build
+        working-directory: CVC4
+      - name: make j4 install
+        run: |
+          ls -al
+          sudo make -j4 install
+          ls -al
+        working-directory: CVC4/build
+      - name: which cvc5
+        run: which cvc5
       - uses: actions/checkout@v3
         with:
           repository: chyanju/Picus
           path: Picus
       - if: steps.racketCache.outputs.cache-hit != 'true'    
         run: raco pkg install --auto --skip-installed rosette csv-reading
-      - if: steps.racketCache.outputs.cache-hit != 'true'    
-        run: brew install z3
-      - name: ls and pwd
-        run:  ls -al
-      - run: pwd
-      - name: ls and al in picus
-        run: pwd
-        working-directory: Picus
-      - run: ls -al
-        working-directory: Picus
       # - run: echo "::set-output name=results::$(racket ./test-v3-uniqueness.rkt --r1cs ../generated/O0/XOR@gates@circomlib.r1cs | grep "Weak safety verified")"
       #   working-directory: Picus
       #   id: setPicusResults
-      - run: echo "::set-output name=results::$(python batchRunPicusV3Longer.py)"
+      - run: |
+          ls -al
+          echo "::set-output name=results::$(python batchRunPicusV3CVC5.py)"
         id: setPicusV3LongerResults
 
   populateReport:
     runs-on: ubuntu-latest
-    needs: [runEcne, runPicus, runPicusV3Longer]
+    needs: [runEcne, runPicus, runPicusV3CVC5]
     steps:
       - uses: actions/checkout@v3
         name: checkoutFormalBenchmarksForJobSummary
       - name: Adding Markdown
-        run: python produceJobSummary.py "${{needs.runEcne.outputs.ecneResults}}" "${{needs.runPicus.outputs.picusResults}}" "${{needs.runPicusV3Longer.outputs.picusResults}}" >> $GITHUB_STEP_SUMMARY
+        run: python produceJobSummary.py "${{needs.runEcne.outputs.ecneResults}}" "${{needs.runPicus.outputs.picusResults}}" "${{needs.runPicusV3CVC5.outputs.picusResults}}" >> $GITHUB_STEP_SUMMARY
     
       
       
