@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         name: checkoutFormalBenchmarksForPicus
-      - name: Cache Test
+      - name: CVC4 Cache
         uses: actions/cache@v3
         id: cvc4Cache
         with:
@@ -43,20 +43,20 @@ jobs:
           distribution: 'full'
           variant: 'CS'
           version: '8.6' # Note: We could use current version here like in here: https://github.com/Bogdanp/setup-racket-cache-example/blob/master/.github/workflows/push.yml but then we need to tweak the caching
-      - if: steps.testCache.outputs.cache-hit != 'true'    
+      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         uses: actions/checkout@v3
         with:
           repository: alex-ozdemir/CVC4
           ref: ddcecc5ee3281831953ea04ba127c80d08122dad
           path: 'CVC4'
-      - if: steps.testCache.outputs.cache-hit != 'true'    
+      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         run: wget "https://cocoa.dima.unige.it/cocoa/cocoalib/tgz/CoCoALib-0.99800.tgz"
         working-directory: CVC4
         name: Restore Cocoa from cache
 
       - name: ls -al
         run: ls -al
-      - if: steps.testCache.outputs.cache-hit != 'true'    
+      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         name: unzip cocoa
         run: tar -xzf CoCoALib-0.99800.tgz
         working-directory: CVC4
@@ -65,11 +65,11 @@ jobs:
       - name: ls -al
         run: ls -al
         working-directory: CVC4/CoCoALib-0.99800
-      - if: steps.testCache.outputs.cache-hit != 'true'            
+      - if: steps.cvc4Cache.outputs.cache-hit != 'true'            
         run: ./configure
         working-directory: CVC4/CoCoALib-0.99800
         name: configure cocoa
-      - if: steps.testCache.outputs.cache-hit != 'true'    
+      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         run: make
         working-directory: CVC4/CoCoALib-0.99800
         name: make cocoa
@@ -79,7 +79,7 @@ jobs:
         run: pip install toml
       - name: ls -al
         run: ls -al
-      - if: steps.testCache.outputs.cache-hit != 'true'    
+      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         run: ./configure.sh --cocoa --auto-download
         name: configure CVC4 build
         working-directory: CVC4        
@@ -87,20 +87,20 @@ jobs:
         run: ls -al
       - name: pwd
         run: pwd
-      - if: steps.testCache.outputs.cache-hit != 'true'    
+      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         run: make
         name: make CVC4 build
         working-directory: CVC4/build
       - name: ls -al
         run: ls -al
-      - if: steps.testCache.outputs.cache-hit != 'true'    
+      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         run: git apply < ../cmake/deps-utils/CoCoALib-0.99800-trace.patch
         working-directory: CVC4/CoCoALib-0.99800
-      - if: steps.testCache.outputs.cache-hit != 'true'    
+      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         run: ./configure
         working-directory: CVC4/CoCoALib-0.99800
         name: configure cocoa after patch
-      - if: steps.testCache.outputs.cache-hit != 'true'    
+      - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         run: make
         working-directory: CVC4/CoCoALib-0.99800
         name: make cocoa after patch
