@@ -108,7 +108,7 @@ jobs:
         run: |
           pwd
           ls -al
-          cd libpoly/build
+          cd build
           ls -al
         working-directory: libpoly
       - name: libpoly cmake
