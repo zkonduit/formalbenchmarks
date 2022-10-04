@@ -28,7 +28,7 @@ jobs:
           path: |
             CVC4
           key: ${{ runner.os }}-CVC4
-     - name: libpoly Cache
+      - name: libpoly Cache
         uses: actions/cache@v3
         id: libpolyCache
         with:
