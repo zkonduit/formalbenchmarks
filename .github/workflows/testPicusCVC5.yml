@@ -86,7 +86,7 @@ jobs:
         working-directory: CVC4
       - name: install toml
         run: pip install toml
-        working-directory: CVC4/build
+        working-directory: CVC4
       - name: ls -al
         run: ls -al
       - name: pwd
@@ -94,7 +94,7 @@ jobs:
       - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
         run: make
         name: make CVC4 build
-        working-directory: CVC4/build
+        working-directory: CVC4
       - name: ls -al
         run: ls -al
       - if: steps.cvc4Cache.outputs.cache-hit != 'true'    
@@ -139,7 +139,7 @@ jobs:
         working-directory: CVC4
       - name: make j4 install
         run: sudo make -j4 install
-        working-directory: CVC4/build
+        working-directory: CVC4
       - name: which cvc5
         run: which cvc5
       - uses: actions/checkout@v3
