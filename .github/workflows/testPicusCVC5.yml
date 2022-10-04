@@ -28,6 +28,13 @@ jobs:
           path: |
             CVC4
           key: ${{ runner.os }}-CVC4
+     - name: libpoly Cache
+        uses: actions/cache@v3
+        id: libpolyCache
+        with:
+          path: |
+            libpoly
+          key: ${{ runner.os }}-libpoly
       - name: Cache Racket dependencies
         uses: actions/cache@v3
         id: racketCache
@@ -108,7 +115,8 @@ jobs:
         run: make
         working-directory: CVC4/CoCoALib-0.99800
         name: make cocoa after patch
-      - uses: actions/checkout@v3
+      - if: steps.libpolyCache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v3
         with:
           repository: SRI-CSL/libpoly
           path: libpoly
@@ -118,11 +126,11 @@ jobs:
       - name: ls -al
         run: ls -al
         working-directory: libpoly
-      - name: libpoly cmake
-        run: cmake .. -DCMAKE_BUILD_TYPE=Release
-        working-directory: libpoly/build
-      - name: libpoly make
-        run: make
+      - if: steps.libpolyCache.outputs.cache-hit != 'true'
+        name: libpoly cmake
+        run: | 
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+          make
         working-directory: libpoly/build
       - name: libpoly make install
         run: sudo make install
