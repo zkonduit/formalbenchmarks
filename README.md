@@ -10,11 +10,6 @@ In addition we collect both positive examples and negative examples. Positive ex
 We are interested in formal validator accuracy, speed, and memory usage.
 
 
-# Algebraicization and arithmetization
-
-
-
-
 
 # Licence
 Many of the circom circuits reproduced or modified here (including circomlib and 0xPARC/circom-ecdsa) are GPL-3.0, so this repository is also GPL-3.0. 
