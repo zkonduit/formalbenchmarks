@@ -8,7 +8,7 @@ import subprocess
 # instantiate dictionary
 picusCircuitToStatus = {}
 
-for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True): # PROD 
+for r1csFile in glob.glob('generated/O0/B*.r1cs', recursive=True): # PROD 
 #for r1csFile in glob.glob('../formalbenchmarks/generated/O0/*.r1cs', recursive=True): # DEV
 #for r1csFile in glob.glob('benchmarks/circomlib/*.r1cs', recursive=True): # DEV
     #print("picus", r1csFile)
