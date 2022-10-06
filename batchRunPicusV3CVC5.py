@@ -15,13 +15,13 @@ for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True): # PROD
     #print("picus", r1csFile)
     rFilePath = Path(r1csFile)
     rFileWithoutExtensionJustName = rFilePath.with_suffix('').name
-    if rFileWithoutExtensionJustName not in picusVerifiedConfig.picusVerifiedList:
+    if rFileWithoutExtensionJustName in picusVerifiedConfig.picusVerifiedList:
         continue
     #print (rFilePath)
     #print (r1csFile)
     #rFileWithSymExtension = rFilePath.with_suffix('.sym')
     try:
-        output = subprocess.run(["racket", "Picus/test-v3-uniqueness.rkt","--r1cs", r1csFile, "--weak", "--solver", "cvc5", "--timeout", "3000"], timeout=400, capture_output=True) # prod
+        output = subprocess.run(["racket", "Picus/test-v3-uniqueness.rkt","--r1cs", r1csFile, "--weak", "--solver", "cvc5", "--timeout", "5000"], timeout=800, capture_output=True) # prod
        # output = subprocess.run(["racket", "test-pp-uniqueness.rkt","--r1cs", r1csFile, "--weak", "--timeout", "5000"], timeout=600, capture_output=True) # dev
 
        # subprocess.run(["racket", "test-v3-uniqueness.rkt","--r1cs", r1csFile, "--weak", "--timeout", "3000"], timeout=600)
