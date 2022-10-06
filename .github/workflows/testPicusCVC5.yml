@@ -95,7 +95,6 @@ jobs:
         name: make CVC4 build
         working-directory: CVC4/build
       - run: |
-          which cvc5
           ls -al
           git apply < ../cmake/deps-utils/CoCoALib-0.99800-trace.patch
         working-directory: CVC4/CoCoALib-0.99800
