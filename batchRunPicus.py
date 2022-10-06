@@ -14,7 +14,7 @@ for r1csFile in glob.glob('../formalbenchmarks/generated/O0/*.r1cs', recursive=T
     #print("picus", r1csFile)
     rFilePath = Path(r1csFile)
     rFileWithoutExtensionJustName = rFilePath.with_suffix('').name
-    if rFileWithoutExtensionJustName not in picusVerifiedConfig.picusVerified:
+    if rFileWithoutExtensionJustName not in picusVerifiedConfig.picusVerifiedList:
         continue
     #print (rFilePath)
     #print (r1csFile)
