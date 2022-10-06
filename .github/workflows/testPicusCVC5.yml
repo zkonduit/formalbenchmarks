@@ -36,6 +36,13 @@ jobs:
             CVC4/CoCoALib-0.99800
             CVC4/CoCoALib-0.99800.tgz
           key: ${{ runner.os }}-cocoa
+      - name: cvcMakeCache
+        uses: actions/cache@v3
+        id: cvcMakeCache
+        with:
+          path: |
+            CVC4/build
+          key: ${{ runner.os }}-cocoa
       #- name: libpoly Cache
       #  uses: actions/cache@v3
       #  id: libpolyCache
@@ -80,13 +87,15 @@ jobs:
           ./configure.sh --cocoa --auto-download
         name: configure CVC4 build
         working-directory: CVC4
-      - run: |
+      - if: steps.cvcMakeCache.outputs.cache-hit != 'true'
+        run: |
           ls -al
           make
           ls -al
         name: make CVC4 build
         working-directory: CVC4/build
       - run: |
+          which cvc5
           ls -al
           git apply < ../cmake/deps-utils/CoCoALib-0.99800-trace.patch
         working-directory: CVC4/CoCoALib-0.99800
