@@ -2,7 +2,7 @@ import glob
 from pathlib import Path
 import subprocess
 from collections import Counter
-
+import picusVerifiedConfig
 
 # Create a map 
 ECNECircuitToStatus = {}
@@ -16,6 +16,8 @@ for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True):
     rFileWithoutExtensionJustName = rFilePath.with_suffix('').name
     rFileWithSymExtension = rFilePath.with_suffix('.sym')
 
+    if rFileWithoutExtensionJustName not in picusVerifiedConfig.picusVerified:
+        continue
     output = subprocess.run(["julia", "--project=EcneProject/.", "EcneProject/src/Ecne.jl", "--name", rFileWithoutExtensionJustName ,"--r1cs", rFilePath, "--sym", rFileWithSymExtension],  capture_output=True)
     #subprocess.run(["julia", "--project=EcneProject/.", "EcneProject/src/Ecne.jl", "--name", rFileWithoutExtensionJustName ,"--r1cs", rFilePath, "--sym", rFileWithSymExtension])
     # search for a string in the output

@@ -1,6 +1,7 @@
 import glob
 from pathlib import Path
 import subprocess
+import picusVerifiedConfig
 
 #markdownOutput = """\n| Circuit | Tool | Sound Constraints? |
 #| -------- | ---- | ---- | """
@@ -14,6 +15,8 @@ for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True): # PROD
     #print("picus", r1csFile)
     rFilePath = Path(r1csFile)
     rFileWithoutExtensionJustName = rFilePath.with_suffix('').name
+    if rFileWithoutExtensionJustName not in picusVerifiedConfig.picusVerified:
+        continue
     #print (rFilePath)
     #print (r1csFile)
     #rFileWithSymExtension = rFilePath.with_suffix('.sym')
