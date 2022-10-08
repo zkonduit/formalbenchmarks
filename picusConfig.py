@@ -33,6 +33,12 @@ picusVerifiedList = [
 "SMTVerifierSM@smtverifiersm@circomlib",
 "Switcher@switcher@circomlib",
 "XOR@gates@circomlib", # 34 circuits at around --timeout", "3000"], timeout=400
+"IsZero@comparators@circomlib",
+"Pedersen@pedersen@circomlib_1",
+"IsEqual@comparators@circomlib",
+"BabyDbl@babyjub@circomlib",
+"Num2BitsNeg@bitify@circomlib_1",
+"Pedersen@pedersen_old@circomlib_1", # 6 circuits at around 4000/500 -> no z3 passed
 ]
 
 picusExcludeList = [
