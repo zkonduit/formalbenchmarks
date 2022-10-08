@@ -38,7 +38,13 @@ picusVerifiedList = [
 picusExcludeList = [
     "Sha256_2@sha256_2@circomlib",
     "Sha256compression@sha256compression@circomlib",
-    "EdDSAMiMCSpongeVerifier@eddsamimcsponge@circomlib.r1cs",
-    "EdDSAMiMCVerifier@eddsamimc@circomlib.r1cs",
-    "EdDSAPoseidonVerifier@eddsaposeidon@circomlib.r1cs"
+    "EdDSAMiMCSpongeVerifier@eddsamimcsponge@circomlib",
+    "EdDSAMiMCVerifier@eddsamimc@circomlib",
+    "EdDSAPoseidonVerifier@eddsaposeidon@circomlib",
+    "Pedersen@pedersen@circomlib_256",
+    "Pedersen@pedersen@circomlib_254",
+    "Pedersen@pedersen@circomlib_253",
+    "Pedersen@pedersen_old@circomlib_256",
+    "Pedersen@pedersen_old@circomlib_254",
+    "Pedersen@pedersen_old@circomlib_253",
 ]
