@@ -10,7 +10,7 @@ ECNECircuitToStatus = {}
 #markdownOutput = """\n| Circuit | Tool | Sound Constraints? |
 #| -------- | ---- | ---- | """
 
-for r1csFile in glob.glob('generated/O0/P*.r1cs', recursive=True):
+for r1csFile in glob.glob('generated/O0/B*.r1cs', recursive=True):
     #print("ecne", r1csFile)
     rFilePath = Path(r1csFile)
     rFileWithoutExtensionJustName = rFilePath.with_suffix('').name
@@ -26,7 +26,7 @@ for r1csFile in glob.glob('generated/O0/P*.r1cs', recursive=True):
         ECNECircuitToStatus[rFileWithoutExtensionJustName] = {"tool" : "ECNE", "result" : "Weakly Verified"} 
         #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | ECNE | :white_check_mark: |')
     else:
-        ECNECircuitToStatus[rFileWithoutExtensionJustName] = {"tool" : "ECNE", "result" : "Not Verified"}
+        ECNECircuitToStatus[rFileWithoutExtensionJustName] = {"tool" : "ECNE", "result" : "Unable to be Verified"}
         #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | ECNE | :x: |')
 
 # use Counter to count the number of each status
