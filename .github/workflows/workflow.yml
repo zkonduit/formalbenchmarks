@@ -70,6 +70,9 @@ jobs:
         with:
           repository: chyanju/Picus
           path: Picus
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
       - if: steps.racketCache.outputs.cache-hit != 'true'    
         run: raco pkg install --auto --skip-installed rosette csv-reading
       - if: steps.racketCache.outputs.cache-hit != 'true'    
