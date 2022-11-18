@@ -8,10 +8,10 @@ import picusConfig
 # instantiate dictionary
 picusCircuitToStatus = {}
 
-for r1csFile in glob.glob('generated/O0/B*.r1cs', recursive=True): # PROD 
+for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True): # PROD 
 #for r1csFile in glob.glob('generated/O0/B*.r1cs', recursive=True): # DEV
 #for r1csFile in glob.glob('benchmarks/circomlib/*.r1cs', recursive=True): # DEV
-    print("r1csFile", r1csFile)
+    #print("r1csFile", r1csFile)
     rFilePath = Path(r1csFile)
     rFileWithoutExtensionJustName = rFilePath.with_suffix('').name
     #if rFileWithoutExtensionJustName in picusConfig.picusVerifiedList or rFileWithoutExtensionJustName in picusConfig.picusExcludeList:
