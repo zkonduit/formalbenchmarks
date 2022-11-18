@@ -26,7 +26,7 @@ for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True):
         ECNECircuitToStatus[rFileWithoutExtensionJustName] = {"tool" : "ECNE", "result" : "Weakly Verified"} 
         #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | ECNE | :white_check_mark: |')
     else:
-        ECNECircuitToStatus[rFileWithoutExtensionJustName] = {"tool" : "ECNE", "result" : "Unable to be Verified"}
+        ECNECircuitToStatus[rFileWithoutExtensionJustName] = {"tool" : "ECNE", "result" : "Unverified"}
         #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | ECNE | :x: |')
 
 # use Counter to count the number of each status
