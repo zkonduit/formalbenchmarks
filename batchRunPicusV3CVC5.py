@@ -30,7 +30,7 @@ for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True): # PROD
             picusCircuitToStatus[rFileWithoutExtensionJustName] = { "tool" : "Picus v3/cvc5", "result" : "Weakly Verified"}
             #print (rFileWithoutExtensionJustName + ' verified')
             #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | Picus | :white_check_mark: |')
-        elif output.stdout.decode('utf-8').find('weak uniqueness: unsafe') == 1:
+        elif output.stdout.decode('utf-8').find('weak uniqueness: unsafe') != -1:
             picusCircuitToStatus[rFileWithoutExtensionJustName] = { "tool" : "Picus v3/cvc5", "result" : "Unsound"}
             #print (rFileWithoutExtensionJustName + ' not verified')
             #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | Picus | :x: |')
