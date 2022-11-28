@@ -261,10 +261,13 @@ jobs:
       - name: ls and pwd
         run:  ls -al
       - run: pwd
-      - name: ls and al in PolynmoialSolver
+      - name: ls and al in PolynomialSolver
         run: pwd
         working-directory: PolynomialSolver
       - run: ls -al
+        working-directory: PolynomialSolver
+      - name: build PolynomialSolver (trying out release mode, no cache)
+        run: cargo build --release
         working-directory: PolynomialSolver
       # - run: echo "::set-output name=results::$(./target/release/check-determinism ../generated/O0/XOR@gates@circomlib.r1cs | grep "DETERMINISTIC")"
       #   working-directory: PolynomialSolver
