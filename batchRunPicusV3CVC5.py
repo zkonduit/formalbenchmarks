@@ -21,7 +21,7 @@ for r1csFile in glob.glob('generated/O0/*.r1cs', recursive=True): # PROD
     #print (r1csFile)
     #rFileWithSymExtension = rFilePath.with_suffix('.sym')
     try:
-        output = subprocess.run(["racket", "Picus/test-v3-uniqueness.rkt","--r1cs", r1csFile, "--weak", "--solver", "cvc5", "--timeout", "5000"], timeout=200, capture_output=True) # prod
+        output = subprocess.run(["racket", "Picus/test-v3-uniqueness.rkt","--r1cs", r1csFile, "--weak", "--solver", "cvc5", "--timeout", "5000"], timeout=100, capture_output=True) # prod
        # output = subprocess.run(["racket", "test-pp-uniqueness.rkt","--r1cs", r1csFile, "--weak", "--timeout", "5000"], timeout=600, capture_output=True) # dev
 
        # subprocess.run(["racket", "test-v3-uniqueness.rkt","--r1cs", r1csFile, "--weak", "--timeout", "3000"], timeout=600)

@@ -250,7 +250,7 @@ jobs:
   runPolynomialSolver:
     runs-on: ubuntu-latest
     outputs:
-      polynomialSolverResults: ${{ steps.setPolynomialSolver.outputs.results }}
+      polynomialSolverResults: ${{ steps.setPolynomialSolverResults.outputs.results }}
     steps:
       - uses: actions/checkout@v3
         name: checkoutFormalBenchmarksForPolynomialSolver

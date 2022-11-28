@@ -21,7 +21,7 @@ for r1csFile in glob.glob('../formalbenchmarks/generated/O0/*.r1cs', recursive=T
     #print (r1csFile)
     #rFileWithSymExtension = rFilePath.with_suffix('.sym')
     try:
-        output = subprocess.run(["./PolynomialSolver/target/release/check-determinism", r1csFile], timeout=200, capture_output=True) # prod
+        output = subprocess.run(["./PolynomialSolver/target/release/check-determinism", r1csFile], timeout=100, capture_output=True) # prod
         #output = subprocess.run(["./target/release/check-determinism", r1csFile], timeout=400, capture_output=True) # dev
 
         if output.stdout.decode('utf-8').find('DETERMINISTIC') != -1:
