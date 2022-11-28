@@ -30,13 +30,13 @@ for r1csFile in glob.glob('../formalbenchmarks/generated/O0/*.r1cs', recursive=T
             #print (rFileWithoutExtensionJustName + ' verified')
             #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | Polynomial Solver | :white_check_mark: |')
         else:
-            print (rFileWithoutExtensionJustName + ' not verified')
+            #print (rFileWithoutExtensionJustName + ' not verified')
             #put this in the map
             circuitToStatus[rFileWithoutExtensionJustName] = { "tool" : "Polynomial Solver", "result" : "Unverified"}
             #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | Polynomial Solver | :x: |')
     
     except subprocess.TimeoutExpired:
-         print("Timeout!!!!!!!!!", rFileWithoutExtensionJustName)
+         #print("Timeout!!!!!!!!!", rFileWithoutExtensionJustName)
          #put this in the map
          circuitToStatus[rFileWithoutExtensionJustName] = { "tool" : "Polynomial Solver", "result" : "Timeout"}
          #markdownOutput+=('\n| '+ rFileWithoutExtensionJustName + ' | Polynomial Solver | :alarm_clock: |')
