@@ -7,7 +7,7 @@ def main(*args):
     #print (args)
     circuitsToOutput = collections.defaultdict(list)
     toolList = []
-    resultToMarkdownMap = {"Weakly Verified" : ":white_check_mark:", "Unsound" : ":x:", "Unverified" : ":question:", "Timeout" : ":alarm_clock:"}
+    resultToMarkdownMap = {"Weakly Verified" : ":white_check_mark:", "Unsound" : ":x:", "Unverified" : ":question:", "Timeout" : ":alarm_clock:", "OtherError" : ":electric_plug:"}
 
     for arg in args[1:]:
         #print (arg)
